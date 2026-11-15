@@ -223,6 +223,70 @@ header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px
 #roleTag[data-role="admin"]::before,#permissionNote[data-role="admin"]::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f6d58a' stroke='%23b7791f' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8l4.2 4L12 4.5 16.8 12 21 8l-2 11H5z'/%3E%3C/svg%3E")}
 #roleTag[data-role="viewer"],#permissionNote[data-role="viewer"]{color:var(--teal-d);background:linear-gradient(135deg,rgba(228,248,245,.96),rgba(150,214,205,.5));border-color:rgba(120,200,190,.85)}
 #roleTag[data-role="viewer"]::before,#permissionNote[data-role="viewer"]::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f6f6b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23a8e0d8'/%3E%3C/svg%3E")}
+
+
+
+/* ===== Installments (Excel-like) ===== */
+.navinner{grid-template-columns:repeat(7,1fr)!important;width:min(640px,100%)}
+.navbtn{font-size:9.5px}
+.stabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;margin:8px 0 2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.stabs::-webkit-scrollbar{display:none}
+.stab{flex:none;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:30px;font-weight:700;font-size:13px;color:var(--teal-d);background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(255,255,255,.4));border:1px solid rgba(255,255,255,.95);box-shadow:0 4px 12px rgba(95,90,160,.12),inset 0 1px 0 #fff;white-space:nowrap;direction:ltr}
+.stab .si{font-style:normal;font-size:12px;opacity:.75}
+.stab.on{color:#fff;background:linear-gradient(135deg,#4f9c93,#3a756f);box-shadow:0 8px 20px rgba(58,117,111,.35),inset 0 1px 0 rgba(255,255,255,.3)}
+.stab.add{direction:rtl;color:#8a5d12;background:linear-gradient(135deg,rgba(255,246,218,.96),rgba(246,214,140,.55));border-color:rgba(240,200,110,.85)}
+.aqsum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:6px 0 12px}
+.aqc{min-width:0;padding:12px;border-radius:18px;background:var(--glass-bg);border:var(--glass-bd);box-shadow:var(--glass-sh)}
+.aqc span{display:block;font-size:11.5px;font-weight:600;color:var(--muted)}
+.aqc strong{display:block;margin-top:4px;font-size:clamp(15px,4.4vw,20px);font-weight:900;color:var(--teal-d);overflow-wrap:anywhere}
+.aqc.hot{background:linear-gradient(130deg,#4f9c93,#2f7a73);border-color:rgba(255,255,255,.8)}
+.aqc.hot span{color:rgba(255,255,255,.88)}.aqc.hot strong{color:#fff}
+.aqbar{margin:6px 0 8px}
+.tbhead{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.tbhead .tbtitle{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tbrow{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tbrow::-webkit-scrollbar{display:none}
+.tbrow .tb{flex:none}
+.tbtitle{font-size:15px;color:var(--teal-d);direction:ltr}
+.tb{border:1px solid rgba(255,255,255,.95);border-radius:11px;padding:7px 11px;font-size:12px;font-weight:700;color:var(--teal-d);background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,255,255,.45));box-shadow:0 3px 9px rgba(95,90,160,.1),inset 0 1px 0 #fff;white-space:nowrap}
+.tb:active{transform:scale(.94)}
+.tb.back{background:linear-gradient(135deg,#4f9c93,#3a756f);color:#fff;border-color:transparent}
+.tb.del{color:#c0405a}
+.fxbar{display:flex;align-items:center;gap:0;direction:ltr;margin-bottom:8px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid rgba(110,120,150,.2);box-shadow:0 2px 8px rgba(95,90,160,.08)}
+.xlname{flex:none;min-width:66px;text-align:center;padding:10px 8px;font-weight:800;font-size:13px;color:var(--teal-d);background:rgba(68,132,125,.12);border-right:1px solid rgba(110,120,150,.2)}
+.fxl{flex:none;padding:0 10px;font-style:italic;font-weight:800;color:#9aa4b2;font-size:13px}
+#xlFx{flex:1;min-width:0;border:0;outline:0;padding:11px 8px;background:transparent;color:var(--ink);font-size:14px}
+.xlwrap{max-height:min(62vh,560px);overflow:auto;border-radius:18px;border:1.5px solid rgba(255,255,255,.9);background:rgba(255,255,255,.62);box-shadow:var(--glass-sh);outline:0;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+table.xl{border-collapse:separate;border-spacing:0;table-layout:fixed;width:max-content;user-select:none;-webkit-user-select:none}
+table.xl th,table.xl td{height:38px;padding:0 9px;border-right:1px solid rgba(110,120,150,.18);border-bottom:1px solid rgba(110,120,150,.18);font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink);text-align:left}
+table.xl thead th{position:sticky;top:0;z-index:3;background:#e8eef6;color:#6b7a8c;font-size:12px;font-weight:700;text-align:center;height:30px}
+table.xl th.rh{position:sticky;left:0;z-index:2;background:#e8eef6;color:#6b7a8c;font-size:12px;font-weight:700;text-align:center;padding:0}
+table.xl th.corner{left:0;z-index:4}
+table.xl th.hl{background:#cfe6e2;color:var(--teal-d)}
+td.num{text-align:right}
+td.h{background:rgba(68,132,125,.15);color:var(--teal-d);font-weight:800}
+td.err{color:#c8405a;font-weight:700}
+td.link{color:var(--teal-d);font-weight:800;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(68,132,125,.4);text-underline-offset:4px}
+td.link::after{content:" ↗";font-size:11px;opacity:.7}
+td.sel{background:rgba(68,132,125,.16)}
+td.act{box-shadow:inset 0 0 0 2px var(--teal);background:rgba(255,255,255,.9)}
+td.editing{padding:0;overflow:visible;background:#fff;box-shadow:inset 0 0 0 2px var(--teal)}
+.xled{width:100%;height:100%;min-width:90px;border:0;outline:0;background:#fff;padding:0 9px;font:inherit;font-size:13.5px;color:var(--ink)}
+.xlwrap.ro td{cursor:default}
+.xlstatus{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;padding:0 4px;font-size:12px;color:var(--muted)}
+.xlstatus b{color:var(--teal-d);font-weight:900}
+.aqnote{margin:12px 2px 6px;font-size:12px;line-height:1.9;color:var(--muted)}
+.aqfoot{display:flex;justify-content:flex-end}
+.aqfoot .btn{font-size:11.5px;padding:7px 12px}
+.aqform{position:fixed;inset:0;z-index:30;display:flex;align-items:flex-end;justify-content:center;padding:14px;background:rgba(60,70,110,.28);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.aqcard{width:min(520px,100%);max-height:92vh;overflow:auto;padding:18px;border-radius:26px;background:linear-gradient(150deg,rgba(255,255,255,.95),rgba(240,238,250,.9));border:1.5px solid #fff;box-shadow:0 20px 50px rgba(60,70,120,.35)}
+.aqcard h3{margin:0 0 6px;color:var(--teal-d);font-size:18px}
+.nfgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.nfwide{grid-column:1/-1}
+.nfmsg{min-height:20px;margin:4px 0;color:#c8405a;font-size:13px;font-weight:700}
+.nfact{display:flex;gap:8px}
+.nfact .btn{flex:1}
+@media(max-width:440px){.aqc{padding:10px}.tb{padding:7px 9px}}
 </style></head>
 <body>
 <header><div class="head"><div class="brand"><div class="mark"><svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11.5c0-2 1.6-3.5 3.5-3.5H22"/><rect x="4" y="10" width="24" height="16" rx="4.5"/><path d="M28 16.5h-5.2a2.6 2.6 0 0 0 0 5.2H28"/><circle cx="23" cy="19.1" r=".9" fill="currentColor" stroke="none"/></svg></div><div><h1>حساب خاص</h1><small>لوحة الإدارة المالية</small></div></div><div class="actions"><span id="roleTag" class="readonly hidden"></span><button id="logout" class="btn ghost hidden" type="button" title="تسجيل الخروج" aria-label="تسجيل الخروج"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-4"/><path d="M8 17l-5-5 5-5"/><path d="M3 12h12"/></svg></button></div></div></header>
@@ -242,8 +306,35 @@ header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px
 <section id="receivables" class="panel section hidden"><h2>المستحقات والالتزامات</h2><form id="receivableForm" class="formgrid admin-only"><label class="field">نوع المستحق<select name="category"><option value="shop">للمحل / للغير</option><option value="customer">للعميل</option></select></label><label class="field">اسم الشخص أو الجهة<input name="creditor" required></label><label class="field">سبب الاستحقاق<input name="reason" required></label><label class="field">المبلغ المتبقي<input name="amount" type="number" min="0" step="0.01" required></label><div style="align-self:end"><button class="btn gold">إضافة مستحق</button></div></form><div class="sumcard"><div class="sum-ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h12l-3-3M17 17H5l3 3"/></svg></div><div class="sum-txt"><span>إجمالي المستحقات</span><small>للمحل والغير + للعملاء</small></div><strong id="allDebtTotal">—</strong><div class="sumbar"><i id="barShop"></i><i id="barCust"></i></div><div class="sumleg"><span><i class="dot" style="background:#f2c46a"></i>للمحل والغير <b id="pctShop">0%</b></span><span><i class="dot" style="background:#f08fb0"></i>للعملاء <b id="pctCust">0%</b></span></div></div><div class="split section rsplit"><div class="card rcard" style="--c:#e0a84a"><h2>مستحقات المحل والغير</h2><strong id="shopDebt">—</strong><div id="shopReceivables"></div></div><div class="card rcard" style="--c:#e5799c"><h2>مستحقات العملاء</h2><strong id="customerDebt">—</strong><div id="customerReceivables"></div></div></div></section>
 <section id="reports" class="panel section hidden"><div class="topline"><h2>التقرير الشهري</h2><div class="actions"><input id="reportMonth" type="month" class="field" style="margin:0;padding:8px;background:#120d10;color:white;border:1px solid #50323e;border-radius:10px"><button id="printReport" class="btn ghost">طباعة التقرير</button></div></div><div id="reportContent" class="section"></div></section>
 <section id="settings" class="panel section hidden"><h2>التحكم في الأرصدة</h2><p class="muted">يمكنك تعديل كل رصيد بشكل مستقل. التعديل لا ينشئ عملية بيع أو شراء ولا يغيّر رصيدًا آخر.</p><form id="settingsForm" class="admin-only"><label class="field">اسم رصيد الشريك<input name="partner_label" required></label><div class="balance-grid"><div class="balance-edit"><label>رصيد الشريك</label><input name="partner_balance" type="number" step="0.01"></div><div class="balance-edit"><label>المخزون (موبايلات)</label><input name="stock_balance" type="number" step="0.01"></div><div class="balance-edit"><label>النقدية</label><input name="cash_balance" type="number" step="0.01"></div><div class="balance-edit"><label>الكاش</label><input name="cashbox_balance" type="number" step="0.01"></div><div class="balance-edit"><label>إنستاباي</label><input name="instapay_balance" type="number" step="0.01"></div></div><div class="notice">رصيد المخزون هنا مستقل وقابل للتعديل يدويًا. تكلفة الأجهزة المسجلة تُعرض كمعلومة تفصيلية منفصلة حتى لا نخلط بين إجمالي الرصيد وقائمة الأجهزة.</div><button class="btn gold">حفظ الأرصدة</button></form><p id="settingsReadOnly" class="readonly hidden">حساب مشاهدة فقط — لا يمكنك تعديل الأرصدة.</p><div class="section"><h2>سجل تعديلات الأرصدة</h2><p class="muted">يُعرض سجل التعديلات عند تفعيل جدول سجل التدقيق في قاعدة البيانات.</p><div id="auditNote" class="muted">—</div></div></section>
+<section id="installments" class="panel section hidden">
+<div class="topline"><h2>الأقساط</h2><span class="badge" id="aqCount">0 عميل</span></div>
+<div id="aqTabs" class="stabs"></div>
+<div id="aqSummary" class="aqsum hidden"></div>
+<div id="aqBar" class="aqbar"></div>
+<div class="fxbar"><span id="xlName" class="xlname">A1</span><span class="fxl">fx</span><input id="xlFx" autocomplete="off" spellcheck="false" dir="auto" placeholder="اكتب قيمة أو معادلة مثل =SUM(E3:E20)"></div>
+<div id="xlWrap" class="xlwrap" tabindex="0" dir="ltr"></div>
+<div id="xlStatus" class="xlstatus"></div>
+<p class="aqnote">البيانات بتتحفظ على الجهاز/المتصفح ده. اضغط على اسم العميل لفتح صفحته، ودوس مرتين على أي خانة للتعديل. المعادلات شغالة زي الإكسيل: <b dir="ltr">SUM · AVERAGE · MIN · MAX · COUNT · ROUND · IF · EDATE</b> وغيرها.</p>
+<div class="aqfoot"><button type="button" class="btn ghost" id="aqReset">استرجاع بيانات الملف الأصلي</button></div>
+<div id="aqForm" class="aqform hidden"><div class="aqcard">
+<h3>عميل جديد</h3>
+<div class="nfgrid">
+<label class="field">اسم العميل<input id="nfName" autocomplete="off"></label>
+<label class="field">نوع الجهاز<input id="nfDevice" autocomplete="off"></label>
+<label class="field">سعر الكاش<input id="nfCash" inputmode="decimal" autocomplete="off"></label>
+<label class="field">سعر التقسيط<input id="nfInst" inputmode="decimal" autocomplete="off"></label>
+<label class="field">المقدم<input id="nfDown" inputmode="decimal" autocomplete="off"></label>
+<label class="field">عدد الشهور<input id="nfMonths" inputmode="numeric" autocomplete="off"></label>
+<label class="field">القسط الشهري<input id="nfMonthly" inputmode="decimal" autocomplete="off"></label>
+<label class="field">يوم الاستحقاق<input id="nfDay" inputmode="numeric" autocomplete="off"></label>
+<label class="field nfwide">تاريخ أول قسط<input id="nfStart" type="date"></label>
+</div>
+<p id="nfMsg" class="nfmsg"></p>
+<div class="nfact"><button type="button" class="btn gold" id="nfOk">إضافة العميل</button><button type="button" class="btn ghost" id="nfCancel">إلغاء</button></div>
+</div></div>
+</section>
 </section></main>
-<nav id="bottomNav" class="bottomnav hidden"><div class="navinner"><button class="navbtn active" data-tab="home"><span class="ico">⌂</span>الرئيسية</button><button class="navbtn" data-tab="devices"><span class="ico">▣</span>المخزون</button><button class="navbtn" data-tab="profits"><span class="ico">◈</span>الأرباح</button><button class="navbtn" data-tab="receivables"><span class="ico">⇄</span>المستحقات</button><button class="navbtn" data-tab="reports"><span class="ico">▤</span>التقارير</button><button class="navbtn" data-tab="settings"><span class="ico">⚙</span>الإعدادات</button></div></nav>
+<nav id="bottomNav" class="bottomnav hidden"><div class="navinner"><button class="navbtn active" data-tab="home"><span class="ico">⌂</span>الرئيسية</button><button class="navbtn" data-tab="devices"><span class="ico">▣</span>المخزون</button><button class="navbtn" data-tab="profits"><span class="ico">◈</span>الأرباح</button><button class="navbtn" data-tab="receivables"><span class="ico">⇄</span>المستحقات</button><button class="navbtn" data-tab="reports"><span class="ico">▤</span>التقارير</button><button class="navbtn" data-tab="installments"><span class="ico">◷</span>الأقساط</button><button class="navbtn" data-tab="settings"><span class="ico">⚙</span>الإعدادات</button></div></nav>
 <footer>حساب خاص · البيانات محفوظة على Supabase</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="app.js"></script>
 <script>
@@ -378,5 +469,949 @@ header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px
     new MutationObserver(function(){role(el)}).observe(el,{childList:true,characterData:true,subtree:true});
   });
 })();
+</script>
+<script>
+/* ===== XL engine: mini spreadsheet formulas (Excel-compatible subset) ===== */
+(function(root){
+'use strict';
+function XlErr(code){this.code=code}
+var AR='٠١٢٣٤٥٦٧٨٩',FA='۰۱۲۳۴۵۶۷۸۹';
+function latin(s){
+  return String(s==null?'':s).replace(/[٠-٩]/g,function(d){return AR.indexOf(d)}).replace(/[۰-۹]/g,function(d){return FA.indexOf(d)})
+    .replace(/٫/g,'.').replace(/٬/g,'').replace(/،/g,',').replace(/؛/g,';');
+}
+function colNum(l){var n=0;for(var i=0;i<l.length;i++)n=n*26+(l.charCodeAt(i)-64);return n}
+function colLet(n){var s='';while(n>0){var m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26)}return s}
+function addr(c,r){return colLet(c)+r}
+function parseAddr(a){var m=/^\$?([A-Za-z]{1,3})\$?(\d+)$/.exec(a);return m?{c:colNum(m[1].toUpperCase()),r:+m[2]}:null}
+
+/* ---- dates (Excel serials) ---- */
+var EPOCH=Date.UTC(1899,11,30);
+function serialToDate(n){return new Date(EPOCH+Math.round(n)*864e5)}
+function dateToSerial(y,m,d){return Math.round((Date.UTC(y,m-1,d)-EPOCH)/864e5)}
+function fmtDate(n){var d=serialToDate(n);return d.getUTCDate()+'/'+(d.getUTCMonth()+1)+'/'+d.getUTCFullYear()}
+function addMonths(serial,k){
+  var d=serialToDate(serial),m=d.getUTCMonth()+k,day=d.getUTCDate();
+  var ny=d.getUTCFullYear()+Math.floor(m/12),nm=((m%12)+12)%12;
+  var last=new Date(Date.UTC(ny,nm+1,0)).getUTCDate();
+  return dateToSerial(ny,nm+1,Math.min(day,last));
+}
+function todaySerial(){var t=new Date();return dateToSerial(t.getFullYear(),t.getMonth()+1,t.getDate())}
+
+/* ---- tokenizer ---- */
+function tokenize(src){
+  var t=[],i=0,n=src.length,m,j;
+  while(i<n){
+    var ch=src.charAt(i);
+    if(/\s/.test(ch)){i++;continue}
+    if(/[0-9.]/.test(ch)){
+      m=/^(\d+\.?\d*|\.\d+)(e[+-]?\d+)?/i.exec(src.slice(i));
+      if(!m)throw new XlErr('#VALUE!');
+      t.push({t:'num',v:parseFloat(m[0])});i+=m[0].length;continue;
+    }
+    if(ch==='"'){
+      var s='';j=i+1;
+      while(j<n){ if(src.charAt(j)==='"'){ if(src.charAt(j+1)==='"'){s+='"';j+=2;continue} break } s+=src.charAt(j++) }
+      if(j>=n)throw new XlErr('#VALUE!');
+      t.push({t:'str',v:s});i=j+1;continue;
+    }
+    if(ch==="'"){
+      var nm='';j=i+1;
+      while(j<n){ if(src.charAt(j)==="'"){ if(src.charAt(j+1)==="'"){nm+="'";j+=2;continue} break } nm+=src.charAt(j++) }
+      if(j>=n||src.charAt(j+1)!=='!')throw new XlErr('#NAME?');
+      t.push({t:'sheet',v:nm});i=j+2;continue;
+    }
+    m=/^[\p{L}_$][\p{L}\p{N}_.$]*/u.exec(src.slice(i));
+    if(m){
+      var w=m[0];i+=w.length;
+      if(src.charAt(i)==='!'){t.push({t:'sheet',v:w});i++;continue}
+      if(src.charAt(i)==='('){t.push({t:'fn',v:w.toUpperCase()});i++;continue}
+      var u=w.toUpperCase();
+      if(u==='TRUE'||u==='FALSE'){t.push({t:'bool',v:u==='TRUE'});continue}
+      if(parseAddr(w)){t.push({t:'ref',v:u.replace(/\$/g,'')});continue}
+      throw new XlErr('#NAME?');
+    }
+    var two=src.substr(i,2);
+    if(two==='<='||two==='>='||two==='<>'){t.push({t:'op',v:two});i+=2;continue}
+    if('+-*/^&=<>(),;:%'.indexOf(ch)>=0){t.push({t:'op',v:ch});i++;continue}
+    throw new XlErr('#VALUE!');
+  }
+  return t;
+}
+
+/* ---- parser (Excel precedence: neg > % > ^ > * / > + - > & > compare) ---- */
+function parse(tokens){
+  var p=0;
+  function isOp(v){var t=tokens[p];return t&&t.t==='op'&&(v===undefined||t.v===v)}
+  function parseCompare(){
+    var l=parseConcat();
+    while(isOp()&&['=','<>','<','>','<=','>='].indexOf(tokens[p].v)>=0){var op=tokens[p++].v;l={k:'bin',op:op,l:l,r:parseConcat()}}
+    return l;
+  }
+  function parseConcat(){var l=parseAdd();while(isOp('&')){p++;l={k:'bin',op:'&',l:l,r:parseAdd()}}return l}
+  function parseAdd(){var l=parseMul();while(isOp('+')||isOp('-')){var op=tokens[p++].v;l={k:'bin',op:op,l:l,r:parseMul()}}return l}
+  function parseMul(){var l=parsePow();while(isOp('*')||isOp('/')){var op=tokens[p++].v;l={k:'bin',op:op,l:l,r:parsePow()}}return l}
+  function parsePow(){var l=parseUnary();while(isOp('^')){p++;l={k:'bin',op:'^',l:l,r:parseUnary()}}return l}
+  function parseUnary(){
+    if(isOp('-')){p++;return {k:'neg',x:parseUnary()}}
+    if(isOp('+')){p++;return parseUnary()}
+    return parsePostfix();
+  }
+  function parsePostfix(){var x=parsePrimary();while(isOp('%')){p++;x={k:'pct',x:x}}return x}
+  function refOrRange(sheet){
+    var t=tokens[p++];
+    if(!t||t.t!=='ref')throw new XlErr('#REF!');
+    if(isOp(':')&&tokens[p+1]&&tokens[p+1].t==='ref'){p++;var t2=tokens[p++];return {k:'range',sheet:sheet,a:t.v,b:t2.v}}
+    return {k:'ref',sheet:sheet,a:t.v};
+  }
+  function parsePrimary(){
+    var t=tokens[p++];
+    if(!t)throw new XlErr('#VALUE!');
+    if(t.t==='num')return {k:'num',v:t.v};
+    if(t.t==='str')return {k:'str',v:t.v};
+    if(t.t==='bool')return {k:'bool',v:t.v};
+    if(t.t==='sheet')return refOrRange(t.v);
+    if(t.t==='ref'){p--;return refOrRange(null)}
+    if(t.t==='fn'){
+      var args=[];
+      if(isOp(')')){p++;return {k:'fn',n:t.v,args:args}}
+      while(p<tokens.length){
+        args.push(parseCompare());
+        if(isOp(',')||isOp(';')){p++;continue}
+        break;
+      }
+      if(isOp(')'))p++; /* lenient: missing ')' at the end is accepted */
+      return {k:'fn',n:t.v,args:args};
+    }
+    if(t.t==='op'&&t.v==='('){
+      var e=parseCompare();
+      if(isOp(')'))p++;
+      return e;
+    }
+    throw new XlErr('#VALUE!');
+  }
+  var ast=parseCompare();
+  if(p<tokens.length)throw new XlErr('#VALUE!');
+  return ast;
+}
+
+/* ---- coercion ---- */
+function toNum(v){
+  if(v===null||v===undefined)return 0;
+  if(typeof v==='number')return v;
+  if(typeof v==='boolean')return v?1:0;
+  if(typeof v==='string'){
+    var s=latin(v).replace(/,/g,'').trim();
+    if(s==='')return 0;
+    if(/^[+-]?(\d+\.?\d*|\.\d+)(e[+-]?\d+)?$/i.test(s))return parseFloat(s);
+    throw new XlErr('#VALUE!');
+  }
+  throw new XlErr('#VALUE!'); /* range or error object */
+}
+function toStr(v){
+  if(v===null||v===undefined)return '';
+  if(typeof v==='boolean')return v?'TRUE':'FALSE';
+  if(typeof v==='number')return String(+v.toFixed(10));
+  if(typeof v==='string')return v;
+  throw new XlErr('#VALUE!');
+}
+function toBool(v){
+  if(typeof v==='boolean')return v;
+  if(typeof v==='string'){var u=v.toUpperCase();if(u==='TRUE')return true;if(u==='FALSE')return false}
+  return toNum(v)!==0;
+}
+function roundHalfAway(x,d){
+  var f=Math.pow(10,d),y=Math.abs(x)*f;
+  var r=Math.round(+(y+1e-9*Math.max(1,y)*0).toFixed(8));
+  return (x<0?-1:1)*r/f;
+}
+function collect(args){
+  var out=[];
+  args.forEach(function(a){
+    if(a&&a.rng){a.rows.forEach(function(r){r.forEach(function(v){
+      if(v&&v.err)throw new XlErr(v.err);
+      out.push({v:v,rng:true});
+    })})}
+    else out.push({v:a,rng:false});
+  });
+  return out;
+}
+function nums(args){
+  var o=[];
+  collect(args).forEach(function(x){
+    if(x.rng){if(typeof x.v==='number')o.push(x.v)}
+    else if(x.v!==null&&x.v!==undefined)o.push(toNum(x.v));
+  });
+  return o;
+}
+var FN={
+  SUM:function(a){return nums(a).reduce(function(x,y){return x+y},0)},
+  AVERAGE:function(a){var n=nums(a);if(!n.length)throw new XlErr('#DIV/0!');return n.reduce(function(x,y){return x+y},0)/n.length},
+  MIN:function(a){var n=nums(a);return n.length?Math.min.apply(null,n):0},
+  MAX:function(a){var n=nums(a);return n.length?Math.max.apply(null,n):0},
+  COUNT:function(a){return collect(a).filter(function(x){return typeof x.v==='number'}).length},
+  COUNTA:function(a){return collect(a).filter(function(x){return x.v!==null&&x.v!==undefined&&x.v!==''}).length},
+  PRODUCT:function(a){var n=nums(a);return n.length?n.reduce(function(x,y){return x*y},1):0},
+  ROUND:function(a){return roundHalfAway(toNum(a[0]),a[1]==null?0:Math.trunc(toNum(a[1])))},
+  ROUNDUP:function(a){var d=a[1]==null?0:Math.trunc(toNum(a[1])),f=Math.pow(10,d),x=toNum(a[0]);return (x<0?-1:1)*Math.ceil(Math.abs(x)*f-1e-9)/f},
+  ROUNDDOWN:function(a){var d=a[1]==null?0:Math.trunc(toNum(a[1])),f=Math.pow(10,d),x=toNum(a[0]);return (x<0?-1:1)*Math.floor(Math.abs(x)*f+1e-9)/f},
+  ABS:function(a){return Math.abs(toNum(a[0]))},
+  INT:function(a){return Math.floor(toNum(a[0]))},
+  SQRT:function(a){var x=toNum(a[0]);if(x<0)throw new XlErr('#NUM!');return Math.sqrt(x)},
+  MOD:function(a){var x=toNum(a[0]),y=toNum(a[1]);if(y===0)throw new XlErr('#DIV/0!');return x-y*Math.floor(x/y)},
+  AND:function(a){return collect(a).every(function(x){return toBool(x.v)})},
+  OR:function(a){return collect(a).some(function(x){return toBool(x.v)})},
+  NOT:function(a){return !toBool(a[0])},
+  TODAY:function(){return todaySerial()},
+  EDATE:function(a){return addMonths(toNum(a[0]),Math.trunc(toNum(a[1])))}
+};
+
+/* ---- calculator bound to a state ---- */
+var astCache={};
+function makeCalc(state){
+  var cache={},busy={},byName={},byId={};
+  state.sheets.forEach(function(s){byId[s.id]=s;byName[s.name.toLowerCase()]=s});
+  function cellVal(sh,a){
+    var key=sh.id+'!'+a;
+    if(Object.prototype.hasOwnProperty.call(cache,key))return cache[key];
+    var c=sh.cells[a],raw=c?c.v:undefined,out;
+    if(typeof raw==='string'&&raw.charAt(0)==='='){
+      if(busy[key])return {err:'#CIRC!'};
+      busy[key]=1;
+      try{out=evalFormula(raw.slice(1),sh)}catch(e){out={err:e instanceof XlErr?e.code:'#VALUE!'}}
+      delete busy[key];
+    }else out=(raw===undefined||raw==='')?null:raw;
+    cache[key]=out;
+    return out;
+  }
+  function sheetOf(node,sh){
+    if(!node.sheet)return sh;
+    var s=byName[String(node.sheet).toLowerCase()];
+    if(!s)throw new XlErr('#REF!');
+    return s;
+  }
+  function ev(n,sh){
+    switch(n.k){
+      case 'num':case 'str':case 'bool':return n.v;
+      case 'ref':{var v=cellVal(sheetOf(n,sh),n.a);if(v&&v.err)throw new XlErr(v.err);return v}
+      case 'range':{
+        var s2=sheetOf(n,sh),p=parseAddr(n.a),q=parseAddr(n.b);
+        var c1=Math.min(p.c,q.c),c2=Math.max(p.c,q.c),r1=Math.min(p.r,q.r),r2=Math.max(p.r,q.r);
+        if((c2-c1+1)*(r2-r1+1)>20000)throw new XlErr('#VALUE!');
+        var rows=[];
+        for(var r=r1;r<=r2;r++){var row=[];for(var c=c1;c<=c2;c++)row.push(cellVal(s2,addr(c,r)));rows.push(row)}
+        return {rng:true,rows:rows};
+      }
+      case 'neg':return -toNum(ev(n.x,sh));
+      case 'pct':return toNum(ev(n.x,sh))/100;
+      case 'bin':{
+        var a=ev(n.l,sh),b=ev(n.r,sh);
+        switch(n.op){
+          case '+':return toNum(a)+toNum(b);
+          case '-':return toNum(a)-toNum(b);
+          case '*':return toNum(a)*toNum(b);
+          case '/':{var d=toNum(b);if(d===0)throw new XlErr('#DIV/0!');return toNum(a)/d}
+          case '^':return Math.pow(toNum(a),toNum(b));
+          case '&':return toStr(a)+toStr(b);
+          default:{
+            var x=a,y=b;
+            if(x===null)x=(typeof y==='string')?'':0;
+            if(y===null)y=(typeof x==='string')?'':0;
+            if(typeof x==='string'&&typeof y==='string'){x=x.toLowerCase();y=y.toLowerCase()}
+            else if(typeof x!==typeof y){
+              /* Excel: numbers < text < booleans */
+              var rank=function(v){return typeof v==='number'?0:typeof v==='string'?1:2};
+              x=rank(x);y=rank(y);
+            }
+            switch(n.op){
+              case '=':return x===y;case '<>':return x!==y;
+              case '<':return x<y;case '>':return x>y;
+              case '<=':return x<=y;case '>=':return x>=y;
+            }
+          }
+        }
+        throw new XlErr('#VALUE!');
+      }
+      case 'fn':{
+        if(n.n==='IF'){
+          if(!n.args.length)throw new XlErr('#VALUE!');
+          if(toBool(ev(n.args[0],sh)))return n.args[1]?ev(n.args[1],sh):true;
+          return n.args[2]?ev(n.args[2],sh):false;
+        }
+        if(n.n==='IFERROR'){
+          if(n.args.length<2)throw new XlErr('#VALUE!');
+          try{return ev(n.args[0],sh)}catch(e){if(e instanceof XlErr)return ev(n.args[1],sh);throw e}
+        }
+        var f=FN[n.n];
+        if(!f)throw new XlErr('#NAME?');
+        return f(n.args.map(function(x){return ev(x,sh)}));
+      }
+    }
+    throw new XlErr('#VALUE!');
+  }
+  function evalFormula(src,sh){
+    var ast=astCache[src];
+    if(!ast){ast=parse(tokenize(src));astCache[src]=ast}
+    var v=ev(ast,sh);
+    if(v&&v.rng)throw new XlErr('#VALUE!');
+    if(v===null)return 0;
+    if(typeof v==='number'&&!isFinite(v))throw new XlErr('#NUM!');
+    return v;
+  }
+  return {val:cellVal};
+}
+
+/* ---- typed input -> stored cell value ---- */
+function parseInput(text){
+  var raw=String(text==null?'':text),t=latin(raw).trim();
+  if(raw.trim()==='')return {v:undefined};
+  if(t.charAt(0)==='=')return {v:t};
+  if(/^[+-]?\d{1,3}(,\d{3})+(\.\d+)?$/.test(t))return {v:parseFloat(t.replace(/,/g,''))};
+  if(/^[+-]?(\d+\.?\d*|\.\d+)$/.test(t))return {v:parseFloat(t)};
+  var m=/^([+-]?(\d+\.?\d*|\.\d+))%$/.exec(t);
+  if(m)return {v:parseFloat(m[1])/100};
+  m=/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/.exec(t);
+  if(m&&+m[1]>=1&&+m[1]<=31&&+m[2]>=1&&+m[2]<=12)return {v:dateToSerial(+m[3],+m[2],+m[1]),f:'date'};
+  m=/^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(t);
+  if(m&&+m[3]>=1&&+m[3]<=31&&+m[2]>=1&&+m[2]<=12)return {v:dateToSerial(+m[1],+m[2],+m[3]),f:'date'};
+  return {v:raw};
+}
+
+/* ---- display ---- */
+function fmtNum(n){
+  if(Math.abs(n)>=1e15)return String(n);
+  return (+n.toFixed(2)).toLocaleString('en-US',{maximumFractionDigits:2});
+}
+function fmtVal(val,cell){
+  if(val&&val.err)return {t:val.err,err:true};
+  if(val===null||val===undefined)return {t:''};
+  if(typeof val==='number'){
+    if(cell&&cell.f==='date')return {t:fmtDate(val)};
+    return {t:fmtNum(val),num:true};
+  }
+  if(typeof val==='boolean')return {t:val?'TRUE':'FALSE'};
+  return {t:String(val)};
+}
+
+root.XL={colNum:colNum,colLet:colLet,addr:addr,parseAddr:parseAddr,serialToDate:serialToDate,dateToSerial:dateToSerial,
+  fmtDate:fmtDate,addMonths:addMonths,todaySerial:todaySerial,latin:latin,parseInput:parseInput,makeCalc:makeCalc,fmtVal:fmtVal,fmtNum:fmtNum};
+})(typeof window!=='undefined'?window:globalThis);
+
+</script>
+<script>
+/* ===== قسم الأقساط: جداول بمعادلات حية زي الإكسيل ===== */
+(function(){
+'use strict';
+var XL=window.XL,KEY='aqsat_v1',SEED={"sheets":[{"id":"s0","name":"الشيت الرئيسي","kind":"main","rows":20,"cols":8,"cells":{"A1":{"v":"اسم العميل","s":"h"},"B1":{"v":"نوع الجهاز","s":"h"},"C1":{"v":"سعر الكاش","s":"h"},"D1":{"v":"سعر التقسيط","s":"h"},"E1":{"v":"المقدم","s":"h"},"F1":{"v":"عدد الشهور","s":"h"},"G1":{"v":"القسط الشهري","s":"h"},"H1":{"v":"تاريخ الاستحقاق","s":"h"},"A2":{"v":"Alaa Mahmoud","link":"s1"},"B2":{"v":"Oppo Reno 13F"},"C2":{"v":16000},"D2":{"v":22000},"E2":{"v":6000},"F2":{"v":10},"G2":{"v":1600},"H2":{"v":"يوم 5"},"A3":{"v":"Ahmed Abdallah","link":"s2"},"B3":{"v":"IP 11"},"C3":{"v":16000},"D3":{"v":17620},"E3":{"v":11500},"F3":{"v":6},"G3":{"v":1020},"H3":{"v":"يوم 10"},"A4":{"v":"Sayed Mohamed","link":"s3"},"B4":{"v":"IP 11"},"C4":{"v":13500},"D4":{"v":13830},"E4":{"v":8000},"F4":{"v":1},"G4":{"v":5830},"H4":{"v":"يوم 11"},"A5":{"v":"Alaa Mahmoud","link":"s4"},"B5":{"v":"IP 17 PM"},"C5":{"v":66000},"D5":{"v":75000},"E5":{"v":4000},"F5":{"v":7},"G5":{"v":5000},"H5":{"v":"يوم 12"},"A6":{"v":"Mohamed Ibrahem","link":"s5"},"B6":{"v":"S25 Ultra"},"C6":{"v":58000},"D6":{"v":76600},"E6":{"v":27000},"F6":{"v":10},"G6":{"v":4960},"H6":{"v":"يوم 13"}},"merges":[]},{"id":"s1","name":"Alaa","kind":"customer","rows":20,"cols":7,"cells":{"A1":{"v":"بيانات العميل","s":"h"},"D1":{"v":"الشهر","s":"h"},"E1":{"v":"المبلغ المدفوع","s":"h"},"F1":{"v":"المتبقي بعد الدفع","s":"h"},"G1":{"v":"عدد الاقساط","s":"h"},"A2":{"v":"اسم العميل","s":"h"},"B2":{"v":"Alaa Mahmoud"},"A3":{"v":"نوع الجهاز","s":"h"},"B3":{"v":"Oppo Reno 13F"},"D3":{"v":46361,"f":"dm"},"F3":{"v":"=16000-E3"},"G3":{"v":1},"A4":{"v":"سعر الكاش","s":"h"},"B4":{"v":16000},"D4":{"v":46392,"f":"dm"},"F4":{"v":"=F3-E4"},"G4":{"v":2},"A5":{"v":"سعر التقسيط","s":"h"},"B5":{"v":22000},"D5":{"v":46423,"f":"dm"},"F5":{"v":"=F4-E5"},"G5":{"v":3},"A6":{"v":"المقدم","s":"h"},"B6":{"v":6000},"D6":{"v":46451,"f":"dm"},"F6":{"v":"=F5-E6"},"G6":{"v":4},"A7":{"v":"عدد الشهور","s":"h"},"B7":{"v":10},"D7":{"v":46482,"f":"dm"},"F7":{"v":"=F6-E7"},"G7":{"v":5},"A8":{"v":"القسط الشهري","s":"h"},"B8":{"v":1600},"D8":{"v":46512,"f":"dm"},"F8":{"v":"=F7-E8"},"G8":{"v":6},"A9":{"v":"تاريخ الاستحقاق","s":"h"},"B9":{"v":"يوم 5"},"D9":{"v":46543,"f":"dm"},"F9":{"v":"=F8-E9"},"G9":{"v":7},"A10":{"v":"إجمالي المدفوع","s":"h"},"B10":{"v":"=SUM(E3:E20)"},"D10":{"v":46573,"f":"dm"},"F10":{"v":"=F9-E10"},"G10":{"v":8},"A11":{"v":"المتبقي","s":"h"},"B11":{"v":"=22000-6000-B10"},"D11":{"v":46604,"f":"dm"},"F11":{"v":"=F10-E11"},"G11":{"v":9},"D12":{"v":46635,"f":"dm"},"F12":{"v":"=F11-E12"},"G12":{"v":10},"B1":{"s":"h"}},"merges":[[2,11,2,12],[4,1,4,2],[7,1,7,2],[5,1,5,2],[6,1,6,2],[1,1,2,1],[1,11,1,12]]},{"id":"s2","name":"Ahmed","kind":"customer","rows":20,"cols":7,"cells":{"A1":{"v":"بيانات العميل","s":"h"},"D1":{"v":"الشهر","s":"h"},"E1":{"v":"المبلغ المدفوع","s":"h"},"F1":{"v":"المتبقي بعد الدفع","s":"h"},"G1":{"v":"عدد الاقساط","s":"h"},"A2":{"v":"اسم العميل","s":"h"},"B2":{"v":"Ahmed Abdallah"},"A3":{"v":"نوع الجهاز","s":"h"},"B3":{"v":"IP 11"},"D3":{"v":46731,"f":"dm"},"F3":{"v":"=6120-E3"},"G3":{"v":1},"A4":{"v":"سعر الكاش","s":"h"},"B4":{"v":16000},"D4":{"v":46397,"f":"dm"},"F4":{"v":"=F3-E4"},"G4":{"v":2},"A5":{"v":"سعر التقسيط","s":"h"},"B5":{"v":17620},"D5":{"v":46428,"f":"dm"},"F5":{"v":"=F4-E5"},"G5":{"v":3},"A6":{"v":"المقدم","s":"h"},"B6":{"v":11500},"D6":{"v":46456,"f":"dm"},"F6":{"v":"=F5-E6"},"G6":{"v":4},"A7":{"v":"عدد الشهور","s":"h"},"B7":{"v":6},"D7":{"v":46487,"f":"dm"},"F7":{"v":"=F6-E7"},"G7":{"v":5},"A8":{"v":"القسط الشهري","s":"h"},"B8":{"v":1020},"D8":{"v":46517,"f":"dm"},"F8":{"v":"=F7-E8"},"G8":{"v":6},"A9":{"v":"تاريخ الاستحقاق","s":"h"},"B9":{"v":"يوم 10"},"A10":{"v":"إجمالي المدفوع","s":"h"},"B10":{"v":"=SUM(E3:E20)"},"A11":{"v":"المتبقي","s":"h"},"B11":{"v":"=17620-11500-B10"},"B1":{"s":"h"}},"merges":[[2,11,2,12],[4,1,4,2],[7,1,7,2],[6,1,6,2],[1,1,2,1],[5,1,5,2],[1,11,1,12]]},{"id":"s3","name":"Sayed","kind":"customer","rows":20,"cols":7,"cells":{"A1":{"v":"بيانات العميل","s":"h"},"D1":{"v":"الشهر","s":"h"},"E1":{"v":"المبلغ المدفوع","s":"h"},"F1":{"v":"المتبقي بعد الدفع","s":"h"},"G1":{"v":"عدد الاقساط","s":"h"},"A2":{"v":"اسم العميل","s":"h"},"B2":{"v":"Sayed Mohamed"},"A3":{"v":"نوع الجهاز","s":"h"},"B3":{"v":"IP 11"},"D3":{"v":46732,"f":"dm"},"F3":{"v":"=5830-E3"},"G3":{"v":1},"A4":{"v":"سعر الكاش","s":"h"},"B4":{"v":13500},"A5":{"v":"سعر التقسيط","s":"h"},"B5":{"v":13830},"A6":{"v":"المقدم","s":"h"},"B6":{"v":8000},"A7":{"v":"عدد الشهور","s":"h"},"B7":{"v":1},"A8":{"v":"القسط الشهري","s":"h"},"B8":{"v":5830},"A9":{"v":"تاريخ الاستحقاق","s":"h"},"B9":{"v":"يوم 11"},"A10":{"v":"إجمالي المدفوع","s":"h"},"B10":{"v":"=SUM(E3:E20)"},"A11":{"v":"المتبقي","s":"h"},"B11":{"v":"=13830-8000-B10"},"B1":{"s":"h"}},"merges":[[2,11,2,12],[4,1,4,2],[7,1,7,2],[1,1,2,1],[5,1,5,2],[6,1,6,2],[1,11,1,12]]},{"id":"s4","name":"Alaa (2)","kind":"customer","rows":20,"cols":7,"cells":{"A1":{"v":"بيانات العميل","s":"h"},"D1":{"v":"الشهر","s":"h"},"E1":{"v":"المبلغ المدفوع","s":"h"},"F1":{"v":"المتبقي بعد الدفع","s":"h"},"G1":{"v":"عدد الاقساط","s":"h"},"A2":{"v":"اسم العميل","s":"h"},"B2":{"v":"Alaa Mahmoud"},"A3":{"v":"نوع الجهاز","s":"h"},"B3":{"v":"IP 17 PM"},"D3":{"v":46368,"f":"dm"},"F3":{"v":"=35000-E3"},"G3":{"v":1},"A4":{"v":"سعر الكاش","s":"h"},"B4":{"v":66000},"D4":{"v":46399,"f":"dm"},"F4":{"v":"=F3-E4"},"G4":{"v":2},"A5":{"v":"سعر التقسيط","s":"h"},"B5":{"v":75000},"D5":{"v":46430,"f":"dm"},"F5":{"v":"=F4-E5"},"G5":{"v":3},"A6":{"v":"المقدم","s":"h"},"B6":{"v":40000},"D6":{"v":46458,"f":"dm"},"F6":{"v":"=F5-E6"},"G6":{"v":4},"A7":{"v":"عدد الشهور","s":"h"},"B7":{"v":7},"D7":{"v":46489,"f":"dm"},"F7":{"v":"=F6-E7"},"G7":{"v":5},"A8":{"v":"القسط الشهري","s":"h"},"B8":{"v":5000},"D8":{"v":46519,"f":"dm"},"F8":{"v":"=F7-E8"},"G8":{"v":6},"A9":{"v":"تاريخ الاستحقاق","s":"h"},"B9":{"v":"يوم 12"},"D9":{"v":46550,"f":"dm"},"F9":{"v":"=F8-E9"},"G9":{"v":7},"A10":{"v":"إجمالي المدفوع","s":"h"},"B10":{"v":"=SUM(E3:E20)"},"A11":{"v":"المتبقي","s":"h"},"B11":{"v":"=75000-40000-B10"},"B1":{"s":"h"}},"merges":[[2,11,2,12],[4,1,4,2],[7,1,7,2],[6,1,6,2],[1,1,2,1],[5,1,5,2],[1,11,1,12]]},{"id":"s5","name":"M.Ibrahem","kind":"customer","rows":20,"cols":7,"cells":{"A1":{"v":"بيانات العميل","s":"h"},"D1":{"v":"الشهر","s":"h"},"E1":{"v":"المبلغ المدفوع","s":"h"},"F1":{"v":"المتبقي بعد الدفع","s":"h"},"G1":{"v":"عدد الاقساط","s":"h"},"A2":{"v":"اسم العميل","s":"h"},"B2":{"v":"Mohamed Ibrahem"},"A3":{"v":"نوع الجهاز","s":"h"},"B3":{"v":"S25 Ultra"},"D3":{"v":46369,"f":"dm"},"F3":{"v":"=49600-E3"},"G3":{"v":1},"A4":{"v":"سعر الكاش","s":"h"},"B4":{"v":58000},"D4":{"v":46400,"f":"dm"},"F4":{"v":"=F3-E4"},"G4":{"v":2},"A5":{"v":"سعر التقسيط","s":"h"},"B5":{"v":76600},"D5":{"v":46431,"f":"dm"},"F5":{"v":"=F4-E5"},"G5":{"v":3},"A6":{"v":"المقدم","s":"h"},"B6":{"v":27000},"D6":{"v":46459,"f":"dm"},"F6":{"v":"=F5-E6"},"G6":{"v":4},"A7":{"v":"عدد الشهور","s":"h"},"B7":{"v":10},"D7":{"v":46490,"f":"dm"},"F7":{"v":"=F6-E7"},"G7":{"v":5},"A8":{"v":"القسط الشهري","s":"h"},"B8":{"v":4960},"D8":{"v":46520,"f":"dm"},"F8":{"v":"=F7-E8"},"G8":{"v":6},"A9":{"v":"تاريخ الاستحقاق","s":"h"},"B9":{"v":"يوم 13"},"D9":{"v":46551,"f":"dm"},"F9":{"v":"=F8-E9"},"G9":{"v":7},"A10":{"v":"إجمالي المدفوع","s":"h"},"B10":{"v":"=SUM(E3:E20)"},"D10":{"v":46581,"f":"dm"},"F10":{"v":"=F9-E10"},"G10":{"v":8},"A11":{"v":"المتبقي","s":"h"},"B11":{"v":"=76600-27000-B10"},"D11":{"v":46612,"f":"dm"},"F11":{"v":"=F10-E11"},"G11":{"v":9},"D12":{"v":46643,"f":"dm"},"F12":{"v":"=F11-E12"},"G12":{"v":10},"B1":{"s":"h"}},"merges":[[2,11,2,12],[4,1,4,2],[7,1,7,2],[6,1,6,2],[1,1,2,1],[5,1,5,2],[1,11,1,12]]}],"active":"s0"};
+var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function $(id){return document.getElementById(id)}
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+
+var state=load(),ui={a:{r:1,c:1},b:{r:1,c:1},ed:null,undo:[],redo:[],clip:null,drag:false,calc:null,form:false};
+
+function load(){
+  try{
+    var s=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(s&&Array.isArray(s.sheets)&&s.sheets.length&&s.sheets[0].kind==='main'){
+      if(!s.sheets.some(function(x){return x.id===s.active}))s.active=s.sheets[0].id;
+      return s;
+    }
+  }catch(e){}
+  return clone(SEED);
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function cur(){for(var i=0;i<state.sheets.length;i++)if(state.sheets[i].id===state.active)return state.sheets[i];return state.sheets[0]}
+function byId(id){for(var i=0;i<state.sheets.length;i++)if(state.sheets[i].id===id)return state.sheets[i]}
+function readOnly(){
+  var t=$('roleTag'),p=$('permissionNote');
+  return (t&&t.getAttribute('data-role')==='viewer')||(p&&p.getAttribute('data-role')==='viewer');
+}
+
+/* ---------- نصوص الخلايا ---------- */
+function rawText(c){
+  if(!c||c.v===undefined||c.v===null)return '';
+  if(typeof c.v==='number'){
+    if(c.f==='dm'||c.f==='date')return XL.fmtDate(c.v);
+    return String(+c.v.toFixed(10));
+  }
+  return String(c.v);
+}
+function show(sh,a){
+  var c=sh.cells[a]||{},v=ui.calc.val(sh,a);
+  if(v&&v.err)return {t:v.err,err:1};
+  if(typeof v==='number'&&c.f==='dm'){var d=XL.serialToDate(v);return {t:d.getUTCDate()+'-'+MON[d.getUTCMonth()],num:1}}
+  return XL.fmtVal(v,c);
+}
+function plain(sh,a){
+  var c=sh.cells[a]||{},v=ui.calc.val(sh,a);
+  if(v&&v.err)return v.err;
+  if(v===null||v===undefined)return '';
+  if(typeof v==='number')return (c.f==='dm'||c.f==='date')?XL.fmtDate(v):String(+v.toFixed(6));
+  return String(v);
+}
+
+/* ---------- تعديل البيانات ---------- */
+function snap(){
+  ui.undo.push(JSON.stringify(state.sheets));
+  if(ui.undo.length>60)ui.undo.shift();
+  ui.redo=[];
+}
+function restore(js){
+  state.sheets=JSON.parse(js);
+  if(!byId(state.active))state.active=state.sheets[0].id;
+}
+function undo(){if(!ui.undo.length)return;ui.redo.push(JSON.stringify(state.sheets));restore(ui.undo.pop());save();renderAll()}
+function redo(){if(!ui.redo.length)return;ui.undo.push(JSON.stringify(state.sheets));restore(ui.redo.pop());save();renderAll()}
+
+function setRaw(sh,a,text){
+  var old=sh.cells[a]||{},p=XL.parseInput(text),o={};
+  if(old.s)o.s=old.s;
+  if(old.link)o.link=old.link;
+  if(p.v===undefined){
+    if(o.s||o.link)sh.cells[a]=o;else delete sh.cells[a];
+    return;
+  }
+  o.v=p.v;
+  var isF=typeof p.v==='string'&&p.v.charAt(0)==='=';
+  if(typeof p.v==='number'||isF){
+    if(p.f)o.f=(old.f==='dm'?'dm':p.f);else if(old.f)o.f=old.f;
+  }
+  sh.cells[a]=o;
+  /* مزامنة الاسم بين الشيت الرئيسي وصفحة العميل */
+  syncName(sh,a,o);
+}
+function syncName(sh,a,o){
+  if(typeof o.v!=='string'||o.v.charAt(0)==='=')return;
+  if(sh.kind==='main'&&a.charAt(0)==='A'){
+    var cell=sh.cells[a];
+    if(cell&&cell.link){var cs=byId(cell.link);if(cs){var b=cs.cells.B2||(cs.cells.B2={});b.v=o.v}}
+  }else if(sh.kind==='customer'&&a==='B2'){
+    var m=state.sheets[0];
+    Object.keys(m.cells).forEach(function(k){
+      if(/^A\d+$/.test(k)&&m.cells[k].link===sh.id)m.cells[k].v=o.v;
+    });
+  }
+}
+function setCellText(a,text){
+  if(readOnly())return;
+  snap();setRaw(cur(),a,text);save();
+}
+function ensureSize(sh,r,c){
+  if(r>sh.rows)sh.rows=Math.min(500,r);
+  if(c>sh.cols)sh.cols=Math.min(26,c);
+}
+
+/* ---------- نسخ المعادلات مع إزاحة الخلايا ---------- */
+function shiftFormula(f,dr,dc){
+  return f.split('"').map(function(seg,i){
+    if(i%2===1)return seg;
+    return seg.replace(/(\$?)([A-Za-z]{1,3})(\$?)(\d{1,6})(?![\d(A-Za-z])/g,function(m,d1,col,d2,row,off,str){
+      if(off>0&&/[A-Za-z0-9_.]/.test(str.charAt(off-1)))return m;
+      var c=XL.colNum(col.toUpperCase()),r=+row;
+      if(!d1)c+=dc;
+      if(!d2)r+=dr;
+      if(c<1||r<1)return '#REF!';
+      return d1+XL.colLet(c)+d2+r;
+    });
+  }).join('"');
+}
+
+/* ---------- التحديد ---------- */
+function rng(){
+  return {r1:Math.min(ui.a.r,ui.b.r),r2:Math.max(ui.a.r,ui.b.r),c1:Math.min(ui.a.c,ui.b.c),c2:Math.max(ui.a.c,ui.b.c)};
+}
+function actAddr(){return XL.addr(ui.a.c,ui.a.r)}
+function tdOf(a){return $('xlWrap').querySelector('td[data-a="'+a+'"]')}
+function updateSel(){
+  var w=$('xlWrap');if(!w)return;
+  Array.prototype.forEach.call(w.querySelectorAll('td.sel,td.act,th.hl'),function(e){e.classList.remove('sel','act','hl')});
+  var g=rng();
+  for(var r=g.r1;r<=g.r2;r++)for(var c=g.c1;c<=g.c2;c++){
+    var t=tdOf(XL.addr(c,r));if(t)t.classList.add('sel');
+  }
+  var at=tdOf(actAddr());if(at){at.classList.add('act');at.classList.remove('sel')}
+  var ch=w.querySelector('th[data-ch="'+ui.a.c+'"]'),rh=w.querySelector('th[data-rh="'+ui.a.r+'"]');
+  if(ch)ch.classList.add('hl');if(rh)rh.classList.add('hl');
+}
+function afterSel(scroll){
+  updateSel();renderFx();renderStatus();
+  if(scroll){var t=tdOf(actAddr());if(t&&t.scrollIntoView)t.scrollIntoView({block:'nearest',inline:'nearest'})}
+}
+function select(r,c,extend){
+  var sh=cur();r=clamp(r,1,sh.rows);c=clamp(c,1,sh.cols);
+  if(extend)ui.b={r:r,c:c};else{ui.a={r:r,c:c};ui.b={r:r,c:c}}
+}
+function move(dr,dc,ext){
+  var t=ext?ui.b:ui.a;
+  select(t.r+dr,t.c+dc,ext);afterSel(true);
+}
+
+/* ---------- الرسم ---------- */
+function renderTabs(){
+  var h='';
+  state.sheets.forEach(function(s){
+    h+='<button type="button" class="stab'+(s.id===state.active?' on':'')+'" data-id="'+s.id+'">'+(s.kind==='main'?'<i class="si">▦</i>':'<i class="si">◔</i>')+esc(s.name)+'</button>';
+  });
+  if(!readOnly())h+='<button type="button" class="stab add" id="aqAdd">＋ عميل جديد</button>';
+  $('aqTabs').innerHTML=h;
+}
+function renderSummary(){
+  var el=$('aqSummary'),sh=cur();
+  if(sh.kind!=='main'){el.innerHTML='';el.classList.add('hidden');return}
+  var paid=0,rem=0,n=0;
+  state.sheets.forEach(function(s){
+    if(s.kind!=='customer')return;
+    n++;
+    var p=ui.calc.val(s,'B10'),r=ui.calc.val(s,'B11');
+    if(typeof p==='number')paid+=p;
+    if(typeof r==='number')rem+=r;
+  });
+  var f=function(x){return XL.fmtNum(x)+' ج.م'};
+  el.classList.remove('hidden');
+  el.innerHTML='<div class="aqc"><span>عدد العملاء</span><strong>'+n+'</strong></div><div class="aqc"><span>إجمالي المدفوع</span><strong>'+f(paid)+'</strong></div><div class="aqc hot"><span>إجمالي المتبقي</span><strong>'+f(rem)+'</strong></div>';
+}
+function renderBar(){
+  var sh=cur(),ro=readOnly(),h='<div class="tbhead">';
+  if(sh.kind==='customer')h+='<button type="button" class="tb back" data-act="back">› الرئيسي</button>';
+  h+='<strong class="tbtitle">'+esc(sh.name)+'</strong>';
+  if(!ro&&sh.kind==='customer')h+='<button type="button" class="tb del" data-act="del">حذف العميل</button>';
+  h+='</div><div class="tbrow">';
+  if(!ro){
+    h+='<button type="button" class="tb" data-act="undo" title="تراجع (Ctrl+Z)">↶ تراجع</button><button type="button" class="tb" data-act="redo" title="إعادة (Ctrl+Y)">↷ إعادة</button>';
+    h+='<button type="button" class="tb" data-act="fmt" title="تنسيق تاريخ">📅 تاريخ</button><button type="button" class="tb" data-act="fill" title="تعبئة لأسفل (Ctrl+D)">⤓ تعبئة</button>';
+    h+='<button type="button" class="tb" data-act="row">＋ صف</button><button type="button" class="tb" data-act="col">＋ عمود</button>';
+  }
+  h+='<button type="button" class="tb" data-act="csv" title="تصدير CSV">⭳ CSV</button></div>';
+  $('aqBar').innerHTML=h;
+  var fx=$('xlFx');if(fx)fx.readOnly=ro;
+}
+function renderFx(){
+  var g=rng(),a1=XL.addr(g.c1,g.r1),a2=XL.addr(g.c2,g.r2);
+  $('xlName').textContent=(a1===a2)?a1:a1+':'+a2;
+  var c=cur().cells[actAddr()];
+  if(document.activeElement!==$('xlFx')&&!ui.ed)$('xlFx').value=rawText(c);
+}
+function renderStatus(){
+  var g=rng(),sh=cur(),el=$('xlStatus');
+  if(g.r1===g.r2&&g.c1===g.c2){el.textContent=readOnly()?'عرض فقط':'دوس مرتين على الخانة للتعديل — اكتب = لعمل معادلة';return}
+  var sum=0,cnt=0,all=0;
+  for(var r=g.r1;r<=g.r2;r++)for(var c=g.c1;c<=g.c2;c++){
+    var v=ui.calc.val(sh,XL.addr(c,r));
+    if(v!==null&&v!==undefined&&v!==''&&!(v&&v.err))all++;
+    if(typeof v==='number'){sum+=v;cnt++}
+  }
+  el.innerHTML='<span>المجموع: <b>'+XL.fmtNum(sum)+'</b></span><span>المتوسط: <b>'+(cnt?XL.fmtNum(sum/cnt):'0')+'</b></span><span>العدد: <b>'+all+'</b></span>';
+}
+function renderGrid(){
+  var sh=cur(),skip={},anc={},w=$('xlWrap');
+  (sh.merges||[]).forEach(function(m){
+    anc[XL.addr(m[0],m[1])]=m;
+    for(var r=m[1];r<=m[3];r++)for(var c=m[0];c<=m[2];c++)if(!(r===m[1]&&c===m[0]))skip[XL.addr(c,r)]=1;
+  });
+  var top=w.scrollTop,left=w.scrollLeft;
+  var h='<table class="xl"><colgroup><col style="width:42px">';
+  for(var c=1;c<=sh.cols;c++)h+='<col style="width:'+(c===1?(sh.kind==='main'?150:132):(sh.kind==='main'?(c===2?130:104):110))+'px">';
+  h+='</colgroup><thead><tr><th class="corner"></th>';
+  for(c=1;c<=sh.cols;c++)h+='<th data-ch="'+c+'">'+XL.colLet(c)+'</th>';
+  h+='</tr></thead><tbody>';
+  for(var r=1;r<=sh.rows;r++){
+    h+='<tr><th class="rh" data-rh="'+r+'">'+r+'</th>';
+    for(c=1;c<=sh.cols;c++){
+      var a=XL.addr(c,r);
+      if(skip[a])continue;
+      var cell=sh.cells[a]||{},d=show(sh,a),cl=[];
+      if(cell.s==='h')cl.push('h');
+      if(d.num)cl.push('num');
+      if(d.err)cl.push('err');
+      if(cell.link)cl.push('link');
+      var m=anc[a],sp='';
+      if(m){if(m[2]>m[0])sp+=' colspan="'+(m[2]-m[0]+1)+'"';if(m[3]>m[1])sp+=' rowspan="'+(m[3]-m[1]+1)+'"'}
+      h+='<td data-a="'+a+'" data-r="'+r+'" data-c="'+c+'" class="'+cl.join(' ')+'"'+sp+(d.num?'':' dir="auto"')+'>'+esc(d.t)+'</td>';
+    }
+    h+='</tr>';
+  }
+  h+='</tbody></table>';
+  w.innerHTML=h;
+  w.scrollTop=top;w.scrollLeft=left;
+}
+function renderAll(){
+  ui.calc=XL.makeCalc(state);
+  ui.ed=null;
+  var sh=cur();
+  ui.a.r=clamp(ui.a.r,1,sh.rows);ui.a.c=clamp(ui.a.c,1,sh.cols);
+  ui.b.r=clamp(ui.b.r,1,sh.rows);ui.b.c=clamp(ui.b.c,1,sh.cols);
+  renderTabs();renderSummary();renderBar();renderGrid();
+  $('xlWrap').classList.toggle('ro',readOnly());
+  $('aqCount').textContent=(state.sheets.length-1)+' عميل';
+  afterSel(false);
+}
+function openSheet(id){
+  commit();
+  if(!byId(id))return;
+  state.active=id;ui.a={r:1,c:1};ui.b={r:1,c:1};save();renderAll();
+  var w=$('xlWrap');w.scrollTop=0;w.scrollLeft=0;
+}
+
+/* ---------- التحرير ---------- */
+function editorTarget(){
+  if(ui.ed){var t=tdOf(ui.ed.a);return t&&t.querySelector('input')}
+  return document.activeElement===$('xlFx')?$('xlFx'):null;
+}
+function startEdit(init){
+  if(readOnly()||ui.ed)return;
+  var sh=cur(),a=actAddr(),td=tdOf(a);if(!td)return;
+  var orig=rawText(sh.cells[a]);
+  ui.ed={a:a,orig:orig};
+  td.classList.add('editing');
+  td.innerHTML='<input class="xled" dir="auto" autocomplete="off" spellcheck="false">';
+  var inp=td.firstChild;inp.value=(init!=null)?init:orig;
+  inp.focus();
+  try{inp.setSelectionRange(inp.value.length,inp.value.length)}catch(e){}
+  $('xlFx').value=inp.value;
+  inp.addEventListener('input',function(){$('xlFx').value=inp.value});
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){e.preventDefault();commit(e.shiftKey?-1:1,0)}
+    else if(e.key==='Tab'){e.preventDefault();commit(0,e.shiftKey?-1:1)}
+    else if(e.key==='Escape'){e.preventDefault();cancelEdit()}
+  });
+  inp.addEventListener('blur',function(){if(ui.ed&&!ui.keep)commit()});
+}
+function commit(dr,dc){
+  var ed=ui.ed;
+  if(!ed)return false;
+  var td=tdOf(ed.a),inp=td&&td.querySelector('input'),text=inp?inp.value:ed.orig;
+  ui.ed=null;
+  if(text!==ed.orig)setCellText(ed.a,text);
+  ui.calc=XL.makeCalc(state);
+  renderAll();
+  if(dr||dc){var t=dr||dc?{r:ui.a.r+(dr||0),c:ui.a.c+(dc||0)}:ui.a;select(t.r,t.c,false);afterSel(true)}
+  $('xlWrap').focus({preventScroll:true});
+  return true;
+}
+function cancelEdit(){
+  ui.ed=null;renderGrid();afterSel(false);$('xlWrap').focus({preventScroll:true});
+}
+function commitFx(){
+  var a=ui.fxCell;ui.fxCell=null;
+  if(!a||readOnly())return;
+  var v=$('xlFx').value,sh=cur();
+  if(v===rawText(sh.cells[a]))return;
+  setCellText(a,v);renderAll();
+}
+
+/* ---------- العمليات ---------- */
+function clearSel(){
+  if(readOnly())return;
+  var g=rng(),sh=cur();snap();
+  for(var r=g.r1;r<=g.r2;r++)for(var c=g.c1;c<=g.c2;c++){
+    var a=XL.addr(c,r),o=sh.cells[a];if(!o)continue;
+    var n={};if(o.s)n.s=o.s;if(o.link)n.link=o.link;
+    if(n.s||n.link)sh.cells[a]=n;else delete sh.cells[a];
+  }
+  save();renderAll();
+}
+function fill(dir){
+  if(readOnly())return;
+  var g=rng(),sh=cur();snap();
+  if(dir==='down'){
+    if(g.r1===g.r2){if(g.r1<2){return}}
+    var sr=g.r1===g.r2?g.r1-1:g.r1,r0=g.r1===g.r2?g.r1:g.r1+1;
+    for(var c=g.c1;c<=g.c2;c++){
+      var src=sh.cells[XL.addr(c,sr)];
+      for(var r=r0;r<=g.r2;r++)putShift(sh,XL.addr(c,r),src,r-sr,0);
+    }
+  }else{
+    var sc=g.c1===g.c2?g.c1-1:g.c1,c0=g.c1===g.c2?g.c1:g.c1+1;
+    if(sc<1)return;
+    for(var r2=g.r1;r2<=g.r2;r2++){
+      var s2=sh.cells[XL.addr(sc,r2)];
+      for(var c2=c0;c2<=g.c2;c2++)putShift(sh,XL.addr(c2,r2),s2,0,c2-sc);
+    }
+  }
+  save();renderAll();
+}
+function putShift(sh,a,src,dr,dc){
+  var old=sh.cells[a]||{},o={};
+  if(old.s)o.s=old.s;if(old.link)o.link=old.link;
+  if(!src||src.v===undefined){if(o.s||o.link)sh.cells[a]=o;else delete sh.cells[a];return}
+  o.v=(typeof src.v==='string'&&src.v.charAt(0)==='=')?shiftFormula(src.v,dr,dc):src.v;
+  if(src.f)o.f=src.f;
+  sh.cells[a]=o;
+}
+function toggleDate(){
+  if(readOnly())return;
+  var g=rng(),sh=cur(),first=sh.cells[XL.addr(g.c1,g.r1)],on=!(first&&first.f==='dm');
+  snap();
+  for(var r=g.r1;r<=g.r2;r++)for(var c=g.c1;c<=g.c2;c++){
+    var a=XL.addr(c,r),o=sh.cells[a]||(sh.cells[a]={});
+    if(on)o.f='dm';else delete o.f;
+  }
+  save();renderAll();
+}
+function addRow(){if(readOnly())return;snap();var sh=cur();sh.rows=Math.min(500,sh.rows+5);save();renderAll()}
+function addCol(){if(readOnly())return;snap();var sh=cur();sh.cols=Math.min(26,sh.cols+1);save();renderAll()}
+function exportCsv(){
+  var sh=cur(),maxR=1,maxC=1;
+  Object.keys(sh.cells).forEach(function(a){var p=XL.parseAddr(a);if(p&&sh.cells[a].v!==undefined){maxR=Math.max(maxR,p.r);maxC=Math.max(maxC,p.c)}});
+  var rows=[];
+  for(var r=1;r<=maxR;r++){
+    var row=[];
+    for(var c=1;c<=maxC;c++){
+      var t=plain(sh,XL.addr(c,r));
+      row.push('"'+t.replace(/"/g,'""')+'"');
+    }
+    rows.push(row.join(','));
+  }
+  var blob=new Blob(['﻿'+rows.join('\r\n')],{type:'text/csv;charset=utf-8'});
+  var u=URL.createObjectURL(blob),l=document.createElement('a');
+  l.href=u;l.download=sh.name.replace(/[^\w؀-ۿ.-]+/g,'_')+'.csv';
+  document.body.appendChild(l);l.click();
+  setTimeout(function(){URL.revokeObjectURL(u);l.remove()},500);
+}
+function deleteCustomer(){
+  var sh=cur();
+  if(readOnly()||sh.kind!=='customer')return;
+  if(!window.confirm('حذف العميل «'+(sh.cells.B2?sh.cells.B2.v:sh.name)+'» وكل أقساطه؟ لا يمكن التراجع بعد إغلاق الصفحة.'))return;
+  snap();
+  var m=state.sheets[0];
+  Object.keys(m.cells).forEach(function(k){
+    var p=XL.parseAddr(k);
+    if(p&&p.c===1&&m.cells[k].link===sh.id){for(var c=1;c<=m.cols;c++)delete m.cells[XL.addr(c,p.r)];
+      if(m.cells[XL.addr(1,p.r)]==null){}}
+  });
+  state.sheets=state.sheets.filter(function(s){return s.id!==sh.id});
+  state.active=m.id;ui.a={r:1,c:1};ui.b={r:1,c:1};save();renderAll();
+}
+
+/* ---------- عميل جديد ---------- */
+function newId(){var n=1;while(byId('s'+n)||n<state.sheets.length)n++;return 's'+Date.now().toString(36)+n}
+function buildCustomer(d){
+  var n=Math.max(1,Math.min(60,d.months|0)),rows=Math.max(20,n+2),cells={},merges=[[1,1,2,1],[4,1,4,2],[5,1,5,2],[6,1,6,2],[7,1,7,2],[1,11,1,12],[2,11,2,12]];
+  var H=function(a,v){cells[a]={v:v,s:'h'}};
+  H('A1','بيانات العميل');cells.B1={s:'h'};H('D1','الشهر');H('E1','المبلغ المدفوع');H('F1','المتبقي بعد الدفع');H('G1','عدد الاقساط');
+  var L=['اسم العميل','نوع الجهاز','سعر الكاش','سعر التقسيط','المقدم','عدد الشهور','القسط الشهري','تاريخ الاستحقاق','إجمالي المدفوع','المتبقي'];
+  L.forEach(function(t,i){H('A'+(i+2),t)});
+  cells.B2={v:d.name};cells.B3={v:d.device};cells.B4={v:d.cash};cells.B5={v:d.inst};cells.B6={v:d.down};
+  cells.B7={v:n};cells.B8={v:d.monthly};cells.B9={v:'يوم '+d.day};
+  cells.B10={v:'=SUM(E3:E'+rows+')'};cells.B11={v:'=B5-B6-B10'};
+  for(var k=1;k<=n;k++){
+    var r=2+k;
+    cells['D'+r]=k===1?{v:d.start,f:'dm'}:{v:'=EDATE(D'+(r-1)+',1)',f:'dm'};
+    cells['F'+r]={v:k===1?'=B5-B6-E3':'=F'+(r-1)+'-E'+r};
+    cells['G'+r]={v:k};
+  }
+  return {id:newId(),name:uniqueName(d.name),kind:'customer',rows:rows,cols:7,cells:cells,merges:merges};
+}
+function uniqueName(base){
+  base=String(base||'عميل').trim().slice(0,28)||'عميل';
+  var name=base,i=2;
+  while(state.sheets.some(function(s){return s.name.toLowerCase()===name.toLowerCase()}))name=base+' ('+(i++)+')';
+  return name;
+}
+function openForm(){
+  if(readOnly())return;
+  var f=$('aqForm'),t=new Date(),day=5;
+  f.classList.remove('hidden');
+  $('nfName').value='';$('nfDevice').value='';$('nfCash').value='';$('nfInst').value='';$('nfDown').value='';$('nfMonths').value='';$('nfMonthly').value='';$('nfMonthly').dataset.m='';
+  $('nfDay').value=day;
+  var nx=new Date(t.getFullYear(),t.getMonth()+1,day);
+  $('nfStart').value=nx.getFullYear()+'-'+('0'+(nx.getMonth()+1)).slice(-2)+'-'+('0'+nx.getDate()).slice(-2);
+  $('nfMsg').textContent='';
+  setTimeout(function(){$('nfName').focus()},50);
+}
+function calcMonthly(){
+  var m=$('nfMonthly');if(m.dataset.m==='1')return;
+  var i=+XL.latin($('nfInst').value),d=+XL.latin($('nfDown').value)||0,n=+XL.latin($('nfMonths').value);
+  if(i>0&&n>0)m.value=Math.round((i-d)/n);
+}
+function submitForm(){
+  var g=function(id){return $(id).value.trim()},num=function(id){var v=+XL.latin(g(id)).replace(/,/g,'');return isFinite(v)?v:NaN};
+  var name=g('nfName'),months=num('nfMonths'),inst=num('nfInst'),down=num('nfDown')||0,cash=num('nfCash')||0,monthly=num('nfMonthly');
+  var msg=$('nfMsg');
+  if(!name){msg.textContent='اكتب اسم العميل';return}
+  if(!(months>=1)){msg.textContent='اكتب عدد الشهور';return}
+  if(!(inst>0)){msg.textContent='اكتب سعر التقسيط';return}
+  var st=g('nfStart').split('-');
+  if(st.length!==3){msg.textContent='اختر تاريخ أول قسط';return}
+  var day=Math.round(num('nfDay'))||+st[2];
+  var start=XL.dateToSerial(+st[0],+st[1],+st[2]);
+  snap();
+  var sh=buildCustomer({name:name,device:g('nfDevice'),cash:cash,inst:inst,down:down,months:months,monthly:isFinite(monthly)?monthly:Math.round((inst-down)/months),day:day,start:start});
+  state.sheets.push(sh);
+  /* صف جديد في الشيت الرئيسي */
+  var m=state.sheets[0],r=2;
+  while(m.cells['A'+r]&&m.cells['A'+r].v!==undefined)r++;
+  m.rows=Math.max(m.rows,r+1);
+  var vals=[name,g('nfDevice'),cash,inst,down,sh.cells.B7.v,sh.cells.B8.v,'يوم '+day];
+  vals.forEach(function(v,i){m.cells[XL.addr(i+1,r)]={v:v}});
+  m.cells['A'+r].link=sh.id;
+  $('aqForm').classList.add('hidden');
+  state.active=sh.id;ui.a={r:3,c:5};ui.b={r:3,c:5};save();renderAll();
+}
+function resetAll(){
+  if(readOnly())return;
+  if(!window.confirm('هترجّع بيانات الأقساط لنسخة الملف الأصلي وتمسح أي تعديل أو عميل جديد. متأكد؟'))return;
+  state=clone(SEED);ui.undo=[];ui.redo=[];ui.a={r:1,c:1};ui.b={r:1,c:1};save();renderAll();
+}
+
+/* ---------- الأحداث ---------- */
+function wire(){
+  var w=$('xlWrap'),fx=$('xlFx');
+  w.addEventListener('mousedown',function(e){
+    var td=e.target.closest&&e.target.closest('td');
+    if(!td||!w.contains(td))return;
+    if(e.target.classList&&e.target.classList.contains('xled'))return;
+    var tgt=editorTarget();
+    if(tgt&&/^=/.test(tgt.value)&&/[=+\-*\/^(,;&<>:]$/.test(tgt.value)&&!(ui.ed&&ui.ed.a===td.dataset.a)){
+      e.preventDefault();
+      tgt.value+=td.dataset.a;
+      if(ui.ed)$('xlFx').value=tgt.value;else{}
+      tgt.focus();return;
+    }
+    if(document.activeElement===fx)commitFx();
+    commit();
+    var r=+td.dataset.r,c=+td.dataset.c;
+    ui.wasActive=(!e.shiftKey&&ui.a.r===r&&ui.a.c===c);
+    w.focus({preventScroll:true});
+    select(r,c,e.shiftKey);ui.drag=true;afterSel(false);
+    if(e.pointerType!=='touch')e.preventDefault();
+  });
+  w.addEventListener('mouseover',function(e){
+    if(!ui.drag||ui.ed)return;
+    var td=e.target.closest&&e.target.closest('td');
+    if(td&&w.contains(td)){ui.b={r:+td.dataset.r,c:+td.dataset.c};updateSel();renderFx();renderStatus()}
+  });
+  document.addEventListener('mouseup',function(){ui.drag=false});
+  w.addEventListener('click',function(e){
+    var td=e.target.closest&&e.target.closest('td');
+    if(!td||ui.ed)return;
+    var cell=cur().cells[td.dataset.a];
+    var multi=(ui.a.r!==ui.b.r||ui.a.c!==ui.b.c);
+    if(cell&&cell.link&&!e.shiftKey&&!multi){openSheet(cell.link);return}
+    if(ui.wasActive&&!multi&&!readOnly()&&window.matchMedia('(pointer:coarse)').matches){ui.wasActive=false;startEdit()}
+  });
+  w.addEventListener('dblclick',function(e){
+    var td=e.target.closest&&e.target.closest('td');
+    if(!td||ui.ed||readOnly())return;
+    var cell=cur().cells[td.dataset.a];
+    if(cell&&cell.link)return;
+    startEdit();
+  });
+  w.addEventListener('keydown',function(e){
+    if(ui.ed||e.target!==w)return;
+    var k=e.key,ctrl=e.ctrlKey||e.metaKey;
+    if(ctrl){
+      var l=k.toLowerCase();
+      if(l==='z'){e.preventDefault();e.shiftKey?redo():undo()}
+      else if(l==='y'){e.preventDefault();redo()}
+      else if(l==='d'){e.preventDefault();fill('down')}
+      else if(l==='r'){e.preventDefault();fill('right')}
+      else if(l==='a'){e.preventDefault();var sh=cur();ui.a={r:1,c:1};ui.b={r:sh.rows,c:sh.cols};afterSel(false)}
+      return;
+    }
+    if(k==='ArrowDown'){e.preventDefault();move(1,0,e.shiftKey)}
+    else if(k==='ArrowUp'){e.preventDefault();move(-1,0,e.shiftKey)}
+    else if(k==='ArrowRight'){e.preventDefault();move(0,1,e.shiftKey)}
+    else if(k==='ArrowLeft'){e.preventDefault();move(0,-1,e.shiftKey)}
+    else if(k==='Enter'){e.preventDefault();move(e.shiftKey?-1:1,0,false)}
+    else if(k==='Tab'){e.preventDefault();move(0,e.shiftKey?-1:1,false)}
+    else if(k==='F2'){e.preventDefault();startEdit()}
+    else if(k==='Delete'||k==='Backspace'){e.preventDefault();clearSel()}
+    else if(k.length===1&&!e.altKey&&!readOnly()){e.preventDefault();startEdit(k)}
+  });
+  function copyText(){
+    var g=rng(),sh=cur(),rows=[],cells=[];
+    for(var r=g.r1;r<=g.r2;r++){
+      var tr=[],cr=[];
+      for(var c=g.c1;c<=g.c2;c++){var a=XL.addr(c,r);tr.push(plain(sh,a));cr.push(sh.cells[a]?clone(sh.cells[a]):null)}
+      rows.push(tr.join('\t'));cells.push(cr);
+    }
+    var text=rows.join('\n');
+    ui.clip={r1:g.r1,c1:g.c1,cells:cells,text:text};
+    return text;
+  }
+  w.addEventListener('copy',function(e){if(ui.ed)return;e.preventDefault();e.clipboardData.setData('text/plain',copyText())});
+  w.addEventListener('cut',function(e){if(ui.ed)return;e.preventDefault();e.clipboardData.setData('text/plain',copyText());clearSel()});
+  w.addEventListener('paste',function(e){
+    if(ui.ed||readOnly())return;
+    e.preventDefault();
+    var text=(e.clipboardData.getData('text/plain')||'').replace(/\r\n?/g,'\n').replace(/\n$/,''),sh=cur();
+    if(text==='')return;
+    snap();
+    if(ui.clip&&ui.clip.text===text){
+      var dr=ui.a.r-ui.clip.r1,dc=ui.a.c-ui.clip.c1;
+      ui.clip.cells.forEach(function(row,i){row.forEach(function(src,j){
+        var r=ui.a.r+i,c=ui.a.c+j;ensureSize(sh,r,c);
+        if(r>sh.rows||c>sh.cols)return;
+        putShift(sh,XL.addr(c,r),src,dr,dc);
+      })});
+    }else{
+      text.split('\n').forEach(function(line,i){line.split('\t').forEach(function(t,j){
+        var r=ui.a.r+i,c=ui.a.c+j;ensureSize(sh,r,c);
+        if(r>sh.rows||c>sh.cols)return;
+        setRaw(sh,XL.addr(c,r),t);
+      })});
+    }
+    save();renderAll();
+  });
+  fx.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){e.preventDefault();commitFx();$('xlWrap').focus({preventScroll:true});move(1,0,false)}
+    else if(e.key==='Escape'){e.preventDefault();ui.fxCell=null;$('xlWrap').focus({preventScroll:true});renderFx()}
+  });
+  fx.addEventListener('focus',function(){ui.fxCell=actAddr()});
+  fx.addEventListener('change',commitFx);
+  fx.addEventListener('input',function(){if(ui.ed){}});
+  $('aqTabs').addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;
+    if(b.id==='aqAdd'){commit();openForm();return}
+    if(b.dataset.id)openSheet(b.dataset.id);
+  });
+  $('aqTabs').addEventListener('dblclick',function(e){
+    var b=e.target.closest('button.stab');
+    if(!b||!b.dataset.id||readOnly())return;
+    var s=byId(b.dataset.id),n=window.prompt('اسم الشيت (يُستخدم في المعادلات):',s.name);
+    if(n&&n.trim()&&n.trim()!==s.name){snap();s.name=uniqueName(n.trim());save();renderAll()}
+  });
+  $('aqBar').addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;
+    commit();
+    var a=b.dataset.act;
+    if(a==='back')openSheet(state.sheets[0].id);
+    else if(a==='undo')undo();else if(a==='redo')redo();
+    else if(a==='fmt')toggleDate();else if(a==='fill')fill('down');
+    else if(a==='row')addRow();else if(a==='col')addCol();
+    else if(a==='csv')exportCsv();else if(a==='del')deleteCustomer();
+  });
+  ['nfInst','nfDown','nfMonths'].forEach(function(id){$(id).addEventListener('input',calcMonthly)});
+  $('nfMonthly').addEventListener('input',function(){this.dataset.m=this.value?'1':''});
+  $('nfCancel').addEventListener('click',function(){$('aqForm').classList.add('hidden')});
+  $('nfOk').addEventListener('click',submitForm);
+  $('aqForm').addEventListener('mousedown',function(e){if(e.target===this)this.classList.add('hidden')});
+  $('aqReset').addEventListener('click',resetAll);
+
+  /* تبويب الأقساط في الشريط السفلي */
+  var nav=$('bottomNav'),sec=$('installments');
+  Array.prototype.forEach.call(nav.querySelectorAll('.navbtn'),function(b){
+    b.addEventListener('click',function(){
+      var t=b.getAttribute('data-tab');
+      if(t==='installments'){
+        Array.prototype.forEach.call(document.querySelectorAll('#app>section'),function(s){s.classList.toggle('hidden',s!==sec)});
+        Array.prototype.forEach.call(nav.querySelectorAll('.navbtn'),function(x){x.classList.toggle('active',x===b)});
+        renderAll();window.scrollTo(0,0);
+      }else{commit();sec.classList.add('hidden')}
+    });
+  });
+  /* لو الدور اتحدد بعد الدخول */
+  ['roleTag','permissionNote'].forEach(function(id){
+    var el=$(id);if(el)new MutationObserver(function(){if(!sec.classList.contains('hidden'))renderAll()}).observe(el,{attributes:true,attributeFilter:['data-role']});
+  });
+}
+wire();
+renderAll();
+window.__aq={state:function(){return state},calc:function(){return ui.calc},ui:ui,openSheet:openSheet,setCellText:setCellText,renderAll:renderAll};
+})();
+
 </script>
 </body></html>
