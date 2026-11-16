@@ -325,6 +325,17 @@ html.lite .navbtn{background:rgba(255,255,255,.95)!important}
 html.lite .navbtn.active{background:#3d7d77!important}
 html.lite .bankcard::before,html.lite .bankcard::after{display:none!important}
 html.lite .aqform{background:rgba(60,70,110,.45)!important}
+
+/* ===== Backup card ===== */
+.bkbox{display:grid;gap:12px;margin:0 0 16px;padding:14px 16px;border-radius:20px;background:rgba(255,255,255,.62);border:1.5px solid rgba(255,255,255,.92)}
+.bkbox .btn{width:100%;padding:12px 16px;font-size:14px}
+.bk-last{margin-top:8px;font-size:12px;font-weight:700;color:var(--teal-d)}
+.bk-last.warn{color:#8a5d12}
+.bk-msg{min-height:0;font-size:12.5px;line-height:1.9;white-space:pre-wrap;color:var(--muted)}
+.bk-msg.ok{color:var(--green);font-weight:700}
+.bk-msg.err{color:#c8405a;font-weight:700}
+html.lite .bkbox{background:rgba(255,255,255,.86)!important}
+
 </style></head>
 <body>
 <header><div class="head"><div class="brand"><div class="mark"><svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11.5c0-2 1.6-3.5 3.5-3.5H22"/><rect x="4" y="10" width="24" height="16" rx="4.5"/><path d="M28 16.5h-5.2a2.6 2.6 0 0 0 0 5.2H28"/><circle cx="23" cy="19.1" r=".9" fill="currentColor" stroke="none"/></svg></div><div><h1>حساب خاص</h1><small>لوحة الإدارة المالية</small></div></div><div class="actions"><span id="roleTag" class="readonly hidden"></span><button id="logout" class="btn ghost hidden" type="button" title="تسجيل الخروج" aria-label="تسجيل الخروج"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-4"/><path d="M8 17l-5-5 5-5"/><path d="M3 12h12"/></svg></button></div></div></header>
@@ -344,6 +355,7 @@ html.lite .aqform{background:rgba(60,70,110,.45)!important}
 <section id="receivables" class="panel section hidden"><h2>المستحقات والالتزامات</h2><form id="receivableForm" class="formgrid admin-only"><label class="field">نوع المستحق<select name="category"><option value="shop">للمحل / للغير</option><option value="customer">للعميل</option></select></label><label class="field">اسم الشخص أو الجهة<input name="creditor" required></label><label class="field">سبب الاستحقاق<input name="reason" required></label><label class="field">المبلغ المتبقي<input name="amount" type="number" min="0" step="0.01" required></label><div style="align-self:end"><button class="btn gold">إضافة مستحق</button></div></form><div class="sumcard"><div class="sum-ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h12l-3-3M17 17H5l3 3"/></svg></div><div class="sum-txt"><span>إجمالي المستحقات</span><small>للمحل والغير + للعملاء</small></div><strong id="allDebtTotal">—</strong><div class="sumbar"><i id="barShop"></i><i id="barCust"></i></div><div class="sumleg"><span><i class="dot" style="background:#f2c46a"></i>للمحل والغير <b id="pctShop">0%</b></span><span><i class="dot" style="background:#f08fb0"></i>للعملاء <b id="pctCust">0%</b></span></div></div><div class="split section rsplit"><div class="card rcard" style="--c:#e0a84a"><h2>مستحقات المحل والغير</h2><strong id="shopDebt">—</strong><div id="shopReceivables"></div></div><div class="card rcard" style="--c:#e5799c"><h2>مستحقات العملاء</h2><strong id="customerDebt">—</strong><div id="customerReceivables"></div></div></div></section>
 <section id="reports" class="panel section hidden"><div class="topline"><h2>التقرير الشهري</h2><div class="actions"><input id="reportMonth" type="month" class="field" style="margin:0;padding:8px;background:#120d10;color:white;border:1px solid #50323e;border-radius:10px"><button id="printReport" class="btn ghost">طباعة التقرير</button></div></div><div id="reportContent" class="section"></div></section>
 <section id="settings" class="panel section hidden"><div class="litebox"><div class="lite-txt"><strong>وضع الخفيف</strong><small>للأجهزة الضعيفة: بيقفل التأثيرات الزجاجية والظلال والحركات والخلفية المزخرفة عشان الموقع يفتح ويتحرك أسرع. الشكل والألوان بتفضل زي ما هي.</small></div><label class="switch"><input type="checkbox" id="liteToggle" aria-label="وضع الخفيف"><span class="knob"></span></label></div>
+<div class="bkbox admin-only"><div class="lite-txt"><strong>نسخة احتياطية (Excel)</strong><small>بينزّل ملف Excel واحد فيه كل بياناتك: الأرصدة والمخزون والأرباح والمستحقات وسجل التعديلات، وكل عملاء الأقساط بمعادلاتهم. اعمل نسخة كل فترة واحفظها في مكان آمن.</small><div id="exportLast" class="bk-last"></div></div><button type="button" class="btn gold" id="exportBtn">⭳ تصدير كل البيانات Excel</button><div id="exportMsg" class="bk-msg" role="status"></div></div>
 <h2>التحكم في الأرصدة</h2><p class="muted">يمكنك تعديل كل رصيد بشكل مستقل. التعديل لا ينشئ عملية بيع أو شراء ولا يغيّر رصيدًا آخر.</p><form id="settingsForm" class="admin-only"><label class="field">اسم رصيد الشريك<input name="partner_label" required></label><div class="balance-grid"><div class="balance-edit"><label>رصيد الشريك</label><input name="partner_balance" type="number" step="0.01"></div><div class="balance-edit"><label>المخزون (موبايلات)</label><input name="stock_balance" type="number" step="0.01"></div><div class="balance-edit"><label>النقدية</label><input name="cash_balance" type="number" step="0.01"></div><div class="balance-edit"><label>الكاش</label><input name="cashbox_balance" type="number" step="0.01"></div><div class="balance-edit"><label>إنستاباي</label><input name="instapay_balance" type="number" step="0.01"></div></div><div class="notice">رصيد المخزون هنا مستقل وقابل للتعديل يدويًا. تكلفة الأجهزة المسجلة تُعرض كمعلومة تفصيلية منفصلة حتى لا نخلط بين إجمالي الرصيد وقائمة الأجهزة.</div><button class="btn gold">حفظ الأرصدة</button></form><p id="settingsReadOnly" class="readonly hidden">حساب مشاهدة فقط — لا يمكنك تعديل الأرصدة.</p><div class="section"><h2>سجل تعديلات الأرصدة</h2><p class="muted">يُعرض سجل التعديلات عند تفعيل جدول سجل التدقيق في قاعدة البيانات.</p><div id="auditNote" class="muted">—</div></div></section>
 <section id="installments" class="panel section hidden">
 <div class="topline"><h2>الأقساط</h2><span class="badge" id="aqCount">0 عميل</span></div>
@@ -1463,5 +1475,267 @@ window.__aq={state:function(){return state},calc:function(){return ui.calc},ui:u
     try{localStorage.setItem('lite_mode',el.checked?'1':'0')}catch(e){}
   });
 })();
+</script>
+<script>
+/* ===== Minimal XLSX writer (no libraries): ZIP "stored" + SpreadsheetML ===== */
+(function(root){
+'use strict';
+var T=(function(){var t=[],c,n,k;for(n=0;n<256;n++){c=n;for(k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+function crc32(b){var c=0xFFFFFFFF;for(var i=0;i<b.length;i++)c=T[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0}
+var enc=new TextEncoder();
+function u16(a,v){a.push(v&255,(v>>>8)&255)}
+function u32(a,v){a.push(v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255)}
+function zip(files){
+  var parts=[],central=[],offset=0;
+  files.forEach(function(f){
+    var name=enc.encode(f.name),data=typeof f.data==='string'?enc.encode(f.data):f.data,crc=crc32(data),h=[];
+    u32(h,0x04034b50);u16(h,20);u16(h,0x0800);u16(h,0);u16(h,0);u16(h,22561);u32(h,crc);u32(h,data.length);u32(h,data.length);u16(h,name.length);u16(h,0);
+    var hb=new Uint8Array(h);parts.push(hb,name,data);
+    var c=[];
+    u32(c,0x02014b50);u16(c,20);u16(c,20);u16(c,0x0800);u16(c,0);u16(c,0);u16(c,22561);u32(c,crc);u32(c,data.length);u32(c,data.length);u16(c,name.length);u16(c,0);u16(c,0);u16(c,0);u16(c,0);u32(c,0);u32(c,offset);
+    central.push(new Uint8Array(c),name);
+    offset+=hb.length+name.length+data.length;
+  });
+  var cdSize=0;central.forEach(function(p){cdSize+=p.length});
+  var e=[];u32(e,0x06054b50);u16(e,0);u16(e,0);u16(e,files.length);u16(e,files.length);u32(e,cdSize);u32(e,offset);u16(e,0);
+  var all=parts.concat(central,[new Uint8Array(e)]),len=0;
+  all.forEach(function(p){len+=p.length});
+  var out=new Uint8Array(len),pos=0;
+  all.forEach(function(p){out.set(p,pos);pos+=p.length});
+  return out;
+}
+function esc(s){
+  return String(s).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F￾￿]/g,'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function colL(n){var s='';while(n>0){var m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26)}return s}
+function cellXml(ref,spec){
+  if(spec===null||spec===undefined||spec==='')return '';
+  var o=(typeof spec==='object')?spec:{v:spec};
+  var s=o.s!=null?' s="'+o.s+'"':'';
+  if(o.f!=null){
+    var f='<f>'+esc(o.f)+'</f>',c=o.c;
+    if(typeof c==='number'&&isFinite(c))return '<c r="'+ref+'"'+s+'>'+f+'<v>'+c+'</v></c>';
+    if(typeof c==='boolean')return '<c r="'+ref+'"'+s+' t="b">'+f+'<v>'+(c?1:0)+'</v></c>';
+    if(typeof c==='string')return '<c r="'+ref+'"'+s+' t="str">'+f+'<v>'+esc(c)+'</v></c>';
+    return '<c r="'+ref+'"'+s+'>'+f+'</c>';
+  }
+  var v=o.v;
+  if(v===null||v===undefined||v==='')return o.s!=null?'<c r="'+ref+'"'+s+'/>':'';
+  if(typeof v==='number')return isFinite(v)?'<c r="'+ref+'"'+s+'><v>'+v+'</v></c>':'';
+  if(typeof v==='boolean')return '<c r="'+ref+'"'+s+' t="b"><v>'+(v?1:0)+'</v></c>';
+  v=String(v);if(v.length>32767)v=v.slice(0,32767);
+  return '<c r="'+ref+'"'+s+' t="inlineStr"><is><t xml:space="preserve">'+esc(v)+'</t></is></c>';
+}
+function sheetXml(sh){
+  var rows=sh.rows||[],x='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"'+(sh.rtl?' rightToLeft="1"':'')+'>';
+  if(sh.freeze)x+='<pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/><selection pane="bottomLeft"/>';
+  x+='</sheetView></sheetViews><sheetFormatPr defaultRowHeight="18"/>';
+  if(sh.cols&&sh.cols.length){x+='<cols>';sh.cols.forEach(function(w,i){x+='<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+w+'" customWidth="1"/>'});x+='</cols>'}
+  x+='<sheetData>';
+  rows.forEach(function(row,ri){
+    if(!row)return;
+    var cs='';
+    row.forEach(function(c,ci){cs+=cellXml(colL(ci+1)+(ri+1),c)});
+    if(cs)x+='<row r="'+(ri+1)+'">'+cs+'</row>';
+  });
+  x+='</sheetData>';
+  if(sh.merges&&sh.merges.length){x+='<mergeCells count="'+sh.merges.length+'">';sh.merges.forEach(function(m){x+='<mergeCell ref="'+m+'"/>'});x+='</mergeCells>'}
+  return x+'</worksheet>';
+}
+var BORDER='<border><left style="thin"><color rgb="FFC9D1DC"/></left><right style="thin"><color rgb="FFC9D1DC"/></right><top style="thin"><color rgb="FFC9D1DC"/></top><bottom style="thin"><color rgb="FFC9D1DC"/></bottom><diagonal/></border>';
+var STYLES='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
++'<numFmts count="3"><numFmt numFmtId="164" formatCode="d\\-mmm"/><numFmt numFmtId="165" formatCode="yyyy\\-mm\\-dd\\ hh:mm"/><numFmt numFmtId="166" formatCode="dd/mm/yyyy"/></numFmts>'
++'<fonts count="3"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FF1F6F6B"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts>'
++'<fills count="4"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFDCEFEC"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFF3F6FA"/><bgColor indexed="64"/></patternFill></fill></fills>'
++'<borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border>'+BORDER+'</borders>'
++'<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>'
++'<cellXfs count="9">'
++'<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>'
++'<xf numFmtId="0" fontId="1" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf>'
++'<xf numFmtId="164" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1"/>'
++'<xf numFmtId="4" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1"/>'
++'<xf numFmtId="4" fontId="2" fillId="3" borderId="1" xfId="0" applyNumberFormat="1" applyFont="1" applyFill="1" applyBorder="1"/>'
++'<xf numFmtId="165" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1"/>'
++'<xf numFmtId="166" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1"/>'
++'<xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1"/>'
++'<xf numFmtId="0" fontId="2" fillId="3" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"/>'
++'</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';
+function safeName(n,used){
+  var s=String(n||'Sheet').replace(/[\\\/?*\[\]:]/g,'-').replace(/^'+|'+$/g,'').trim().slice(0,31)||'Sheet',b=s,i=2;
+  while(used[s.toLowerCase()]){var suf=' ('+(i++)+')';s=b.slice(0,31-suf.length)+suf}
+  used[s.toLowerCase()]=1;return s;
+}
+function build(sheets){
+  var used={},names=sheets.map(function(s){return safeName(s.name,used)});
+  var files=[],n=sheets.length,i;
+  var ct='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>';
+  for(i=1;i<=n;i++)ct+='<Override PartName="/xl/worksheets/sheet'+i+'.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>';
+  ct+='</Types>';
+  files.push({name:'[Content_Types].xml',data:ct});
+  files.push({name:'_rels/.rels',data:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'});
+  var wb='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><bookViews><workbookView/></bookViews><sheets>';
+  var rel='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">';
+  for(i=1;i<=n;i++){
+    wb+='<sheet name="'+esc(names[i-1])+'" sheetId="'+i+'" r:id="rId'+i+'"/>';
+    rel+='<Relationship Id="rId'+i+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet'+i+'.xml"/>';
+  }
+  wb+='</sheets><calcPr fullCalcOnLoad="1"/></workbook>';
+  rel+='<Relationship Id="rId'+(n+1)+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>';
+  files.push({name:'xl/workbook.xml',data:wb});
+  files.push({name:'xl/_rels/workbook.xml.rels',data:rel});
+  files.push({name:'xl/styles.xml',data:STYLES});
+  sheets.forEach(function(s,k){files.push({name:'xl/worksheets/sheet'+(k+1)+'.xml',data:sheetXml(s)})});
+  return {bytes:zip(files),names:names};
+}
+root.BackupXLSX={build:build,colL:colL};
+})(typeof window!=='undefined'?window:globalThis);
+
+</script>
+<script>
+/* ===== زر النسخة الاحتياطية (Excel) في الإعدادات ===== */
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id)};
+var btn=$('exportBtn');if(!btn)return;
+var KEY='last_export_at';
+var MONEY={cost:1,expected_price:1,profit:1,amount:1,partner_balance:1,stock_balance:1,cash_balance:1,cashbox_balance:1,instapay_balance:1};
+var TABLES=[
+  {t:'app_settings',sheet:'الأرصدة',order:'id',kv:true,labels:{partner_label:'اسم رصيد الشريك',partner_balance:'رصيد الشريك',stock_balance:'المخزون (موبايلات)',cash_balance:'النقدية',cashbox_balance:'الكاش',instapay_balance:'إنستاباي',updated_at:'آخر تحديث',id:'id'}},
+  {t:'devices',sheet:'المخزون',order:'created_at',cols:[['name','الجهاز',30],['storage','السعة',12],['ram','الرام',12],['color','اللون',14],['condition','الحالة',14],['cost','التكلفة',15],['expected_price','سعر البيع المتوقع',18],['notes','ملاحظات',26],['created_at','تاريخ الإضافة',19],['id','id',38]],totals:['cost','expected_price']},
+  {t:'profits',sheet:'الأرباح',order:'date',cols:[['date','التاريخ',14],['customer','الوصف',30],['phone','الهاتف',14],['sale_type','نوع البيع',14],['profit','الربح',15],['notes','ملاحظات',26],['created_at','تاريخ الإضافة',19],['id','id',38]],totals:['profit']},
+  {t:'receivables',sheet:'المستحقات',order:'created_at',cols:[['category','النوع (shop للمحل / customer للعميل)',22],['creditor','الاسم',24],['reason','السبب',26],['amount','المبلغ المتبقي',16],['status','الحالة',12],['created_at','تاريخ الإضافة',19],['id','id',38]],totals:['amount']},
+  {t:'balance_audit',sheet:'سجل تعديل الأرصدة',order:'changed_at',cols:[['changed_at','وقت التعديل',19],['changed_by','بواسطة',30],['old_values','قبل',40],['new_values','بعد',40],['id','id',38]]}
+];
+var ISO_D=/^\d{4}-\d{2}-\d{2}$/,ISO_T=/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/;
+
+function conv(k,v){
+  if(v===null||v===undefined)return {v:'',s:7};
+  if(MONEY[k]&&v!==''&&isFinite(Number(v)))return {v:Number(v),s:3};
+  if(typeof v==='number')return {v:v,s:7};
+  if(typeof v==='boolean')return {v:v?'نعم':'لا',s:7};
+  if(typeof v==='object')return {v:JSON.stringify(v),s:7};
+  if(typeof v==='string'){
+    if(ISO_D.test(v)){var p=v.split('-');return {v:Date.UTC(+p[0],+p[1]-1,+p[2])/864e5+25569,s:6}}
+    if(ISO_T.test(v)){var t=new Date(v);if(!isNaN(t))return {v:(t.getTime()-t.getTimezoneOffset()*6e4)/864e5+25569,s:5}}
+  }
+  return {v:v,s:7};
+}
+function head(l){return {v:l,s:1}}
+function tableSheet(cfg,rows){
+  var known={},cols=cfg.cols.slice();
+  cols.forEach(function(c){known[c[0]]=1});
+  var extra=[];
+  rows.forEach(function(r){Object.keys(r).forEach(function(k){if(!known[k]&&extra.indexOf(k)<0)extra.push(k)})});
+  extra.forEach(function(k){cols.push([k,k,18])});
+  var out=[cols.map(function(c){return head(c[1])})];
+  rows.forEach(function(r){out.push(cols.map(function(c){return conv(c[0],r[c[0]])}))});
+  if(cfg.totals&&rows.length){
+    var n=rows.length+1,tr=cols.map(function(){return {v:'',s:8}});
+    tr[0]={v:'الإجمالي',s:8};
+    cfg.totals.forEach(function(k){
+      var ci=cols.findIndex(function(c){return c[0]===k});if(ci<0)return;
+      var L=BackupXLSX.colL(ci+1),sum=0;
+      rows.forEach(function(r){var x=Number(r[k]);if(isFinite(x))sum+=x});
+      tr[ci]={f:'SUM('+L+'2:'+L+n+')',c:sum,s:4};
+    });
+    out.push(tr);
+  }
+  return {name:cfg.sheet,rtl:true,freeze:true,cols:cols.map(function(c){return c[2]}),rows:out};
+}
+function kvSheet(cfg,rows){
+  var r=rows[0]||{},out=[[head('البند'),head('القيمة')]];
+  var keys=Object.keys(cfg.labels).filter(function(k){return k in r});
+  Object.keys(r).forEach(function(k){if(keys.indexOf(k)<0)keys.push(k)});
+  keys.forEach(function(k){out.push([{v:cfg.labels[k]||k,s:7},conv(k,r[k])])});
+  out.push([{v:'تاريخ التصدير',s:8},{v:new Date().toLocaleString('en-GB'),s:8}]);
+  return {name:cfg.sheet,rtl:true,freeze:true,cols:[28,26],rows:out};
+}
+async function fetchAll(cfg){
+  var out=[],from=0,step=1000,ordered=true;
+  for(;;){
+    var q=sb.from(cfg.t).select('*');
+    if(ordered&&cfg.order)q=q.order(cfg.order,{ascending:true});
+    var r=await q.range(from,from+step-1);
+    if(r.error){if(ordered&&from===0){ordered=false;continue}throw r.error}
+    var d=r.data||[];out=out.concat(d);
+    if(d.length<step)break;from+=step;
+  }
+  return out;
+}
+function aqSheets(){
+  try{
+    if(!window.__aq||!window.XL)return [];
+    var st=window.__aq.state(),calc=XL.makeCalc(st);
+    return st.sheets.map(function(sh){
+      var rows=[],merges=[];
+      for(var r=1;r<=sh.rows;r++){
+        var row=[];
+        for(var c=1;c<=sh.cols;c++){
+          var a=XL.addr(c,r),cell=sh.cells[a],o=null;
+          if(cell){
+            var base=cell.s==='h'?1:7,fm=cell.f==='dm'?2:(cell.f==='date'?6:base);
+            if(typeof cell.v==='string'&&cell.v.charAt(0)==='='){
+              var val=calc.val(sh,a);
+              o={f:cell.v.slice(1),s:fm};
+              if(!(val&&val.err))o.c=val;
+            }else if(typeof cell.v==='number')o={v:cell.v,s:fm};
+            else if(cell.v!==undefined)o={v:cell.v,s:base};
+            else o={s:base};
+          }
+          row.push(o);
+        }
+        rows.push(row);
+      }
+      (sh.merges||[]).forEach(function(m){merges.push(XL.addr(m[0],m[1])+':'+XL.addr(m[2],m[3]))});
+      var widths=[];for(var k=1;k<=sh.cols;k++)widths.push(k===1?24:16);
+      return {name:sh.name,rtl:false,cols:widths,rows:rows,merges:merges};
+    });
+  }catch(e){return []}
+}
+function say(t,cls){var m=$('exportMsg');m.textContent=t;m.className='bk-msg'+(cls?' '+cls:'')}
+function lastTxt(){
+  var el=$('exportLast'),v=null;
+  try{v=localStorage.getItem(KEY)}catch(e){}
+  if(!v){el.textContent='لم يتم تصدير نسخة من قبل — يُفضّل عمل نسخة الآن.';el.className='bk-last warn';return}
+  var d=new Date(v),days=Math.floor((Date.now()-d.getTime())/864e5);
+  el.textContent='آخر نسخة: '+d.toLocaleDateString('en-GB')+' ('+(days<=0?'اليوم':'من '+days+' يوم')+')'+(days>30?' — عدّى أكتر من شهر، يُفضّل عمل نسخة جديدة.':'');
+  el.className='bk-last'+(days>30?' warn':'');
+}
+async function run(){
+  if(typeof sb==='undefined'||!sb||typeof role==='undefined'||role!=='admin'){say('التصدير متاح لحساب المدير فقط بعد تسجيل الدخول.','err');return}
+  btn.disabled=true;
+  try{
+    var sheets=[],failed=[],counts=[];
+    for(var i=0;i<TABLES.length;i++){
+      var cfg=TABLES[i];
+      say('جارٍ تحميل: '+cfg.sheet+' …');
+      try{
+        var rows=await fetchAll(cfg);
+        sheets.push(cfg.kv?kvSheet(cfg,rows):tableSheet(cfg,rows));
+        if(!cfg.kv)counts.push(cfg.sheet+' '+rows.length);
+      }catch(e){failed.push(cfg.sheet+' ('+(e&&e.message||e)+')')}
+    }
+    if(!sheets.length)throw new Error('تعذر تحميل أي جدول');
+    var aq=aqSheets();
+    aq.forEach(function(s){sheets.push(s)});
+    say('جارٍ تجهيز الملف …');
+    var res=BackupXLSX.build(sheets);
+    var blob=new Blob([res.bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    var d=new Date(),ds=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);
+    var u=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=u;a.download='حساب-خاص-'+ds+'.xlsx';
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(u);a.remove()},1500);
+    if(!failed.length){try{localStorage.setItem(KEY,d.toISOString())}catch(e){}}
+    lastTxt();
+    say('تم تنزيل الملف ('+sheets.length+' ورقة): '+counts.join(' · ')+(aq.length?' · الأقساط '+(aq.length-1)+' عميل':'')+(failed.length?'\nتعذر تصدير: '+failed.join('، '):''),failed.length?'err':'ok');
+  }catch(e){
+    say('تعذر التصدير: '+(e&&e.message||e),'err');
+  }finally{btn.disabled=false}
+}
+btn.addEventListener('click',run);
+lastTxt();
+})();
+
 </script>
 </body></html>
