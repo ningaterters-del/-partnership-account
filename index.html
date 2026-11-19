@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#d3d6ee"><script>try{if(localStorage.getItem('lite_mode')==='1')document.documentElement.classList.add('lite')}catch(e){}</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#d3d6ee"><script>try{if(localStorage.getItem('lite_mode')==='1')document.documentElement.classList.add('lite')}catch(e){}</script>
 <title>حساب خاص</title>
 <script>
 /* شريط تشخيص الأخطاء: بيظهر فقط لو في ملف ما اتحملش أو حصل خطأ في الكود */
@@ -424,6 +424,9 @@ html.lite .duestrip{box-shadow:none!important}
 html.lite .cc,html.lite .tr,html.lite .pr,html.lite .info>div,html.lite .setup{box-shadow:none!important;background:rgba(255,255,255,.9)!important}
 html.lite .fab,html.lite .cvhero{box-shadow:none!important}
 
+html.lite .aqc.hot{background:linear-gradient(130deg,#4f9c93,#2f7a73)!important}
+html.lite .aqc.due{background:linear-gradient(130deg,#f2b25c,#d9822b)!important}
+html{touch-action:manipulation;-webkit-text-size-adjust:100%}
 </style></head>
 <body>
 <header><div class="head"><div class="brand"><div class="mark"><svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11.5c0-2 1.6-3.5 3.5-3.5H22"/><rect x="4" y="10" width="24" height="16" rx="4.5"/><path d="M28 16.5h-5.2a2.6 2.6 0 0 0 0 5.2H28"/><circle cx="23" cy="19.1" r=".9" fill="currentColor" stroke="none"/></svg></div><div><h1>حساب خاص</h1><small>لوحة الإدارة المالية</small></div></div><div class="actions"><span id="roleTag" class="readonly hidden"></span><button id="logout" class="btn ghost hidden" type="button" title="تسجيل الخروج" aria-label="تسجيل الخروج"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-4"/><path d="M8 17l-5-5 5-5"/><path d="M3 12h12"/></svg></button></div></div></header>
@@ -444,7 +447,7 @@ html.lite .fab,html.lite .cvhero{box-shadow:none!important}
 <section id="receivables" class="panel section hidden"><h2>المستحقات والالتزامات</h2><form id="receivableForm" class="formgrid admin-only"><label class="field">نوع المستحق<select name="category"><option value="shop">للمحل / للغير</option><option value="customer">للعميل</option></select></label><label class="field">اسم الشخص أو الجهة<input name="creditor" required></label><label class="field">سبب الاستحقاق<input name="reason" required></label><label class="field">المبلغ المتبقي<input name="amount" type="number" min="0" step="0.01" required></label><div style="align-self:end"><button class="btn gold">إضافة مستحق</button></div></form><div class="sumcard"><div class="sum-ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h12l-3-3M17 17H5l3 3"/></svg></div><div class="sum-txt"><span>إجمالي المستحقات</span><small>للمحل والغير + للعملاء</small></div><strong id="allDebtTotal">—</strong><div class="sumbar"><i id="barShop"></i><i id="barCust"></i></div><div class="sumleg"><span><i class="dot" style="background:#f2c46a"></i>للمحل والغير <b id="pctShop">0%</b></span><span><i class="dot" style="background:#f08fb0"></i>للعملاء <b id="pctCust">0%</b></span></div></div><div class="split section rsplit"><div class="card rcard" style="--c:#e0a84a"><h2>مستحقات المحل والغير</h2><strong id="shopDebt">—</strong><div id="shopReceivables"></div></div><div class="card rcard" style="--c:#e5799c"><h2>مستحقات العملاء</h2><strong id="customerDebt">—</strong><div id="customerReceivables"></div></div></div></section>
 <section id="reports" class="panel section hidden"><div class="topline"><h2>التقرير الشهري</h2><div class="actions"><input id="reportMonth" type="month" class="field" style="margin:0;padding:8px;background:#120d10;color:white;border:1px solid #50323e;border-radius:10px"><button id="printReport" class="btn ghost">طباعة التقرير</button></div></div><div id="reportContent" class="section"></div></section>
 <section id="settings" class="panel section hidden"><div class="litebox"><div class="lite-txt"><strong>وضع الخفيف</strong><small>للأجهزة الضعيفة: بيقفل التأثيرات الزجاجية والظلال والحركات والخلفية المزخرفة عشان الموقع يفتح ويتحرك أسرع. الشكل والألوان بتفضل زي ما هي.</small></div><label class="switch"><input type="checkbox" id="liteToggle" aria-label="وضع الخفيف"><span class="knob"></span></label></div>
-<div class="bkbox admin-only"><div class="lite-txt"><strong>نسخة احتياطية (Excel)</strong><small>بينزّل ملف Excel واحد فيه كل بياناتك: الأرصدة والمخزون والأرباح والمستحقات وسجل التعديلات، وكل عملاء الأقساط بمعادلاتهم. اعمل نسخة كل فترة واحفظها في مكان آمن.</small><div id="exportLast" class="bk-last"></div></div><button type="button" class="btn gold" id="exportBtn">⭳ تصدير كل البيانات Excel</button><div id="exportMsg" class="bk-msg" role="status"></div></div>
+<div class="bkbox admin-only"><div class="lite-txt"><strong>نسخة احتياطية (Excel)</strong><small>بينزّل ملف Excel واحد فيه كل بياناتك: الأرصدة والمخزون والأرباح والمستحقات ووكل عملاء الأقساط بأقساطهم ودفعاتهم. اعمل نسخة كل فترة واحفظها في مكان آمن.</small><div id="exportLast" class="bk-last"></div></div><button type="button" class="btn gold" id="exportBtn">⭳ تصدير كل البيانات Excel</button><div id="exportMsg" class="bk-msg" role="status"></div></div>
 <h2>التحكم في الأرصدة</h2><p class="muted">يمكنك تعديل كل رصيد بشكل مستقل. التعديل لا ينشئ عملية بيع أو شراء ولا يغيّر رصيدًا آخر.</p><form id="settingsForm" class="admin-only"><label class="field">اسم رصيد الشريك<input name="partner_label" required></label><div class="balance-grid"><div class="balance-edit"><label>رصيد الشريك</label><input name="partner_balance" type="number" step="0.01"></div><div class="balance-edit"><label>المخزون (موبايلات)</label><input name="stock_balance" type="number" step="0.01"></div><div class="balance-edit"><label>النقدية</label><input name="cash_balance" type="number" step="0.01"></div><div class="balance-edit"><label>الكاش</label><input name="cashbox_balance" type="number" step="0.01"></div><div class="balance-edit"><label>إنستاباي</label><input name="instapay_balance" type="number" step="0.01"></div></div><div class="notice">رصيد المخزون هنا مستقل وقابل للتعديل يدويًا. تكلفة الأجهزة المسجلة تُعرض كمعلومة تفصيلية منفصلة حتى لا نخلط بين إجمالي الرصيد وقائمة الأجهزة.</div><button class="btn gold">حفظ الأرصدة</button></form><p id="settingsReadOnly" class="readonly hidden">حساب مشاهدة فقط — لا يمكنك تعديل الأرصدة.</p><div class="hidden" aria-hidden="true"><div id="auditNote"></div></div></section>
 <section id="installments" class="panel section hidden"><div id="aqRoot"></div><div id="aqModal" class="aqform hidden"></div></section>
 </section></main>
@@ -843,7 +846,7 @@ lastTxt();
 var $=function(id){return document.getElementById(id)};
 var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 var SQL="-- ============ الأقساط أونلاين: جداول + صلاحيات (شغّله مرة واحدة) ============\ncreate table if not exists public.aq_customers (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  phone text default '',\n  device text default '',\n  cash_price numeric default 0,\n  install_price numeric default 0,\n  down_payment numeric default 0,\n  months int default 0,\n  monthly numeric default 0,\n  due_day int,\n  notes text default '',\n  created_at timestamptz default now()\n);\ncreate table if not exists public.aq_installments (\n  id uuid primary key default gen_random_uuid(),\n  customer_id uuid not null references public.aq_customers(id) on delete cascade,\n  seq int not null,\n  due_date date not null,\n  amount numeric not null default 0,\n  created_at timestamptz default now()\n);\ncreate table if not exists public.aq_payments (\n  id uuid primary key default gen_random_uuid(),\n  customer_id uuid not null references public.aq_customers(id) on delete cascade,\n  amount numeric not null check (amount > 0),\n  paid_at date not null default current_date,\n  note text default '',\n  created_at timestamptz default now()\n);\ncreate index if not exists aq_inst_customer on public.aq_installments(customer_id);\ncreate index if not exists aq_pay_customer on public.aq_payments(customer_id);\n\n-- دوال الصلاحيات (بتقرأ جدول profiles اللي التطبيق بيستخدمه)\ncreate or replace function public.aq_is_member() returns boolean\nlanguage sql stable security definer set search_path = public as\n$$ select exists (select 1 from public.profiles where id = auth.uid()) $$;\ncreate or replace function public.aq_is_admin() returns boolean\nlanguage sql stable security definer set search_path = public as\n$$ select exists (select 1 from public.profiles where id = auth.uid() and role = 'admin') $$;\n\n-- تفعيل RLS: أي مستخدم مسجل في التطبيق يقرأ، والمدير فقط يضيف ويعدّل ويحذف\ndo $$\ndeclare t text;\nbegin\n  foreach t in array array['aq_customers','aq_installments','aq_payments'] loop\n    execute format('alter table public.%I enable row level security', t);\n    execute format('drop policy if exists %I on public.%I', t || '_read', t);\n    execute format('create policy %I on public.%I for select to authenticated using (public.aq_is_member())', t || '_read', t);\n    execute format('drop policy if exists %I on public.%I', t || '_write', t);\n    execute format('create policy %I on public.%I for all to authenticated using (public.aq_is_admin()) with check (public.aq_is_admin())', t || '_write', t);\n    execute format('revoke all on public.%I from anon', t);\n    execute format('grant select, insert, update, delete on public.%I to authenticated', t);\n  end loop;\nend $$;\n\n-- التحديث اللحظي بين الأجهزة\ndo $$\ndeclare t text;\nbegin\n  foreach t in array array['aq_customers','aq_installments','aq_payments'] loop\n    begin\n      execute format('alter publication supabase_realtime add table public.%I', t);\n    exception when others then null;\n    end;\n  end loop;\nend $$;\n";
-var SEED=[{"name":"Alaa Mahmoud","device":"Oppo Reno 13F","cash":16000,"inst":22000,"down":6000,"months":10,"monthly":1600,"day":5,"dates":["2026-12-05","2027-01-05","2027-02-05","2027-03-05","2027-04-05","2027-05-05","2027-06-05","2027-07-05","2027-08-05","2027-09-05"],"amounts":[1600,1600,1600,1600,1600,1600,1600,1600,1600,1600]},{"name":"Ahmed Abdallah","device":"IP 11","cash":16000,"inst":17620,"down":11500,"months":6,"monthly":1020,"day":10,"dates":["2027-12-10","2027-01-10","2027-02-10","2027-03-10","2027-04-10","2027-05-10"],"amounts":[1020,1020,1020,1020,1020,1020]},{"name":"Sayed Mohamed","device":"IP 11","cash":13500,"inst":13830,"down":8000,"months":1,"monthly":5830,"day":11,"dates":["2027-12-11"],"amounts":[5830]},{"name":"Alaa Mahmoud","device":"IP 17 PM","cash":66000,"inst":75000,"down":40000,"months":7,"monthly":5000,"day":12,"dates":["2026-12-12","2027-01-12","2027-02-12","2027-03-12","2027-04-12","2027-05-12","2027-06-12"],"amounts":[5000,5000,5000,5000,5000,5000,5000]},{"name":"Mohamed Ibrahem","device":"S25 Ultra","cash":58000,"inst":76600,"down":27000,"months":10,"monthly":4960,"day":13,"dates":["2026-12-13","2027-01-13","2027-02-13","2027-03-13","2027-04-13","2027-05-13","2027-06-13","2027-07-13","2027-08-13","2027-09-13"],"amounts":[4960,4960,4960,4960,4960,4960,4960,4960,4960,4960]}];
+var SEED=[{"name": "Alaa Mahmoud", "device": "Oppo Reno 13F", "cash": 16000, "inst": 22000, "down": 6000, "months": 10, "monthly": 1600, "day": 5, "dates": ["2026-12-05", "2027-01-05", "2027-02-05", "2027-03-05", "2027-04-05", "2027-05-05", "2027-06-05", "2027-07-05", "2027-08-05", "2027-09-05"], "amounts": [1600, 1600, 1600, 1600, 1600, 1600, 1600, 1600, 1600, 1600]}, {"name": "Ahmed Abdallah", "device": "IP 11", "cash": 16000, "inst": 17620, "down": 11500, "months": 6, "monthly": 1020, "day": 10, "dates": ["2027-12-10", "2027-01-10", "2027-02-10", "2027-03-10", "2027-04-10", "2027-05-10"], "amounts": [1020, 1020, 1020, 1020, 1020, 1020]}, {"name": "Sayed Mohamed", "device": "IP 11", "cash": 13500, "inst": 13830, "down": 8000, "months": 1, "monthly": 5830, "day": 11, "dates": ["2027-12-11"], "amounts": [5830]}, {"name": "Alaa Mahmoud", "device": "IP 17 PM", "cash": 66000, "inst": 75000, "down": 40000, "months": 7, "monthly": 5000, "day": 12, "dates": ["2026-12-12", "2027-01-12", "2027-02-12", "2027-03-12", "2027-04-12", "2027-05-12", "2027-06-12"], "amounts": [5000, 5000, 5000, 5000, 5000, 5000, 5000]}, {"name": "Mohamed Ibrahem", "device": "S25 Ultra", "cash": 58000, "inst": 76600, "down": 27000, "months": 10, "monthly": 4960, "day": 13, "dates": ["2026-12-13", "2027-01-13", "2027-02-13", "2027-03-13", "2027-04-13", "2027-05-13", "2027-06-13", "2027-07-13", "2027-08-13", "2027-09-13"], "amounts": [4960, 4960, 4960, 4960, 4960, 4960, 4960, 4960, 4960, 4960]}];
 var SOON=3;
 var A={ready:false,missing:false,err:'',loading:false,started:false,cust:[],inst:{},pay:{},cs:[],filter:'all',q:'',cur:null,ch:null,timer:null,seeding:false};
 
@@ -1079,9 +1082,11 @@ function custHtml(o){
 
 /* ---------- النوافذ ---------- */
 function openModal(html){
-  var m=$('aqModal');m.innerHTML='<div class="aqcard">'+html+'</div>';m.classList.remove('hidden');A.modalLock=true;
+  var m=$('aqModal');m.innerHTML='<div class="aqcard">'+html+'</div>';m.classList.remove('hidden');if(!A.modalLock){var h=hst();hpush(h.cust?{cust:h.cust,m:1}:{m:1})}A.modalLock=true;
 }
-function closeModal(){var m=$('aqModal');m.classList.add('hidden');m.innerHTML='';A.modalLock=false}
+function hpush(x){try{history.pushState(Object.assign({tab:'installments'},x),'')}catch(e){}}
+function hst(){try{return history.state||{}}catch(e){return {}}}
+function closeModal(quiet){var m=$('aqModal'),was=A.modalLock;m.classList.add('hidden');m.innerHTML='';A.modalLock=false;if(was&&!quiet&&hst().m){try{history.back()}catch(e){}}}
 function msgIn(t){var e=$('mMsg');if(e)e.textContent=t||''}
 function busy(on){var b=$('mOk');if(b)b.disabled=on}
 function fail(e){busy(false);msgIn('تعذر الحفظ: '+((e&&e.message)||e))}
@@ -1140,7 +1145,7 @@ function custModal(o){
     base.months=months;base.due_day=Math.round(num($('mDay').value))||+start.split('-')[2];
     var made=await createWithSchedule(base,start,months);
     if(made.error)return fail(made.error);
-    closeModal();A.cur=made.id;await load();render();updateStrip();
+    closeModal();A.cur=made.id;hpush({cust:made.id});await load();render();updateStrip();
   };
   setTimeout(function(){var e=$('mName');if(e)e.focus()},60);
 }
@@ -1185,7 +1190,7 @@ async function delCust(o){
   if(!window.confirm('حذف العميل «'+o.c.name+'» وكل أقساطه ودفعاته؟ لا يمكن التراجع.'))return;
   var r=await client().from('aq_customers').delete().eq('id',o.c.id);
   if(r.error){window.alert('تعذر الحذف: '+r.error.message);return}
-  A.cur=null;await load();render();updateStrip();
+  A.cur=null;if(hst().cust){try{history.back()}catch(e){}}await load();render();updateStrip();
 }
 async function delPay(id){
   if(!window.confirm('حذف هذه الدفعة؟'))return;
@@ -1240,13 +1245,13 @@ function wire(){
   root.addEventListener('click',function(e){
     var t=e.target.closest('[data-open],[data-act],[data-f],[data-inst],[data-delpay]');
     if(!t)return;
-    if(t.dataset.open){A.cur=t.dataset.open;render();window.scrollTo(0,0);return}
+    if(t.dataset.open){A.cur=t.dataset.open;hpush({cust:A.cur});render();window.scrollTo(0,0);return}
     if(t.dataset.f){A.filter=t.dataset.f;renderList();return}
     var o=A.cur?byId(A.cur):null;
     if(t.dataset.inst){if(o&&isAdmin())instModal(o,t.dataset.inst);return}
     if(t.dataset.delpay){if(isAdmin())delPay(t.dataset.delpay);return}
     var a=t.dataset.act;
-    if(a==='back'){A.cur=null;render();window.scrollTo(0,0)}
+    if(a==='back'){if(hst().cust){history.back()}else{A.cur=null;render();window.scrollTo(0,0)}}
     else if(a==='retry'){A.loading=true;render();load().then(function(){A.loading=false;if(A.ready&&!A.ch)subscribe();render();updateStrip()})}
     else if(a==='copysql'){
       var ta=$('aqSql');ta.select();var ok=false;
@@ -1273,6 +1278,11 @@ function wire(){
     if(document.hidden||!A.started)return;
     recompute();updateStrip();if(!sec.classList.contains('hidden')&&A.modalLock!==true)render();
   });
+  window.addEventListener('popstate',function(){
+    var st=hst();
+    if(A.modalLock&&!st.m)closeModal(true);
+    if(A.cur&&!st.cust&&(st.tab||'home')==='installments'){A.cur=null;render();window.scrollTo(0,0)}
+  });
   /* تبويب الأقساط في الشريط السفلي */
   Array.prototype.forEach.call(nav.querySelectorAll('.navbtn'),function(b){
     b.addEventListener('click',function(){
@@ -1296,4 +1306,25 @@ window.__aq2={ready:function(){return A.ready},sql:function(){return SQL},rows:f
 })();
 
 </script>
+<script>
+/* ===== زر الرجوع في الموبايل: يرجع للتبويب/الشاشة السابقة بدل ما يقفل ===== */
+(function(){
+  var TABS=['home','devices','profits','receivables','reports','installments','settings'];
+  function cur(){var a=document.querySelector('.navbtn.active');return a?a.getAttribute('data-tab'):'home'}
+  try{history.replaceState({tab:'home'},'')}catch(e){}
+  var go=false;
+  document.querySelectorAll('.navbtn').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(go)return;var t=b.getAttribute('data-tab'),s=history.state||{};
+      if(s.tab!==t||s.cust||s.m){try{history.pushState({tab:t},'')}catch(e){}}
+    });
+  });
+  window.addEventListener('popstate',function(){
+    var t=(history.state&&history.state.tab)||'home';
+    if(TABS.indexOf(t)<0)t='home';
+    if(cur()!==t){var b=document.querySelector('.navbtn[data-tab="'+t+'"]');if(b){go=true;b.click();go=false;window.scrollTo(0,0)}}
+  });
+})();
+</script>
+
 </body></html>
